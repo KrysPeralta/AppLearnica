@@ -10,6 +10,9 @@ export default defineConfig({
     react(),
     legacy()
   ],
+  build: {
+    outDir: 'build', // Cambia el directorio de salida a 'build'
+  },
   test: {
     globals: true,
     environment: 'jsdom',
