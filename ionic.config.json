@@ -1,0 +1,7 @@
+{
+  "name": "AppLearnica",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
