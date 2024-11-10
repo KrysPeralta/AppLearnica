@@ -1,0 +1,68 @@
+/* Estilos para la barra de navegación */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1e3a8a;
+  padding: 10px 20px;
+  color: #ffffff;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-links a {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-button {
+  background-color: #ffffff;
+  color: #1e3a8a;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estilos del carrusel */
+.carousel {
+  margin-top: 20px;
+  position: relative;
+  width: 100%;
+}
+
+.carousel-image {
+  width: 100%;
+  max-width: auto; /* Ajusta este valor según el tamaño deseado */
+  height: 700px;
+  border-radius: 10px;
+}
+
+.carousel-swiper {
+  width: 100%;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.swiper-pagination-bullet {
+  background: #1e3a8a;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ffffff;
+}
