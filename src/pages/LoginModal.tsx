@@ -1,37 +1,42 @@
+// LoginModal.tsx
 import React from 'react';
-import { IonModal, IonButton, IonInput, IonLabel, IonItem } from '@ionic/react';
+import { IonModal, IonInput, IonButton } from '@ionic/react';
 import './LoginModal.css';
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSwitchToRegister: () => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToRegister}) => {
   return (
-<IonModal isOpen={isOpen} onDidDismiss={onClose} className="custom-modal">
-  <div className="login-modal-content">
-    {/* Logo del modal */}
-    <div className="modal-logo">
-      <span role="img" aria-label="user-icon">👤</span>
-    </div>
+    <IonModal isOpen={isOpen} onDidDismiss={onClose}>
+      {/* Contenedor principal del modal */}
+      <div className="login-modal-content">
+        
+        {/* Ícono del usuario */}
+        <div className="login-modal-icon">👤</div>
 
-        {/* Campos de usuario y contraseña */}
-        <IonItem className="modal-input">
-          <IonLabel position="floating">Usuario</IonLabel>
-          <IonInput type="text" />
-        </IonItem>
-        <IonItem className="modal-input">
-          <IonLabel position="floating">Contraseña</IonLabel>
-          <IonInput type="password" />
-        </IonItem>
-
-        {/* Opciones adicionales */}
-        <p className="recover-password">Recuperar Contraseña</p>
+        {/* Campos de entrada de usuario y contraseña */}
+        <div className="login-modal-inputs">
+          <label>Usuario</label>
+          <IonInput type="text" className="login-input" placeholder="Ingresa tu usuario" />
+          <label>Contraseña</label>
+          <IonInput type="password" className="login-input" placeholder="Ingresa tu contraseña" />
+          <a href="#" className="login-modal-recover">Recuperar Contraseña</a>
+        </div>
 
         {/* Botones de iniciar sesión y registrarse */}
-        <IonButton expand="block" className="modal-button">INICIAR SESIÓN</IonButton>
-        <IonButton expand="block" fill="outline" className="modal-button">REGÍSTRATE</IonButton>
+        <div className="login-modal-buttons">
+          <IonButton expand="block" onClick={onClose} className="login-button-primary">
+            INICIAR SESIÓN
+          </IonButton>
+          <IonButton expand="block" fill="outline" onClick={onSwitchToRegister} className="login-button-secondary">
+            REGÍSTRATE
+          </IonButton>
+        </div>
+        
       </div>
     </IonModal>
   );

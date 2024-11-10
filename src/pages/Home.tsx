@@ -6,7 +6,25 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './Home.css';
 
+import { useState } from 'react';
+import LoginModal from './LoginModal';
+import RegisterModal from './RegisterModal';
+
 const Home: React.FC = () => {
+
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
+  const openRegisterModal = () => {
+    setIsLoginModalOpen(false); // Cerrar el Modal de Login si está abierto
+    setIsRegisterModalOpen(true);
+  };
+
+  const openLoginModal = () => {
+    setIsRegisterModalOpen(false); // Cerrar el Modal de Registro si está abierto
+    setIsLoginModalOpen(true);
+  };
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -18,7 +36,7 @@ const Home: React.FC = () => {
             <a href="/materias">Materias</a>
             <a href="/biblioteca">Biblioteca</a>
           </nav>
-          <button className="login-button">Iniciar sesión</button>
+          <button className="login-button" onClick={() => setIsLoginModalOpen(true)}>Iniciar sesión</button>
         </header>
 
         {/* Carrusel de imágenes con Swiper */}
@@ -42,6 +60,21 @@ const Home: React.FC = () => {
             </SwiperSlide>
           </Swiper>
         </div>
+
+        
+        {/* Modales */}
+        <LoginModal 
+          isOpen={isLoginModalOpen} 
+          onClose={() => setIsLoginModalOpen(false)}
+          onSwitchToRegister={openRegisterModal} 
+        />
+
+        <RegisterModal 
+          isOpen={isRegisterModalOpen} 
+          onClose={() => setIsRegisterModalOpen(false)} 
+          onSwitchToLogin={openLoginModal} 
+        />
+
       </IonContent>
     </IonPage>
   );
