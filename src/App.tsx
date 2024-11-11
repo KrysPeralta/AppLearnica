@@ -37,6 +37,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './pages/Home.css';
+import Biblioteca from './pages/Biblioteca';
 
 setupIonicReact();
 
@@ -58,6 +59,10 @@ const App: React.FC = () => (
 
         <Route exact path="/grupos">
           <Grupos />
+        </Route>
+
+        <Route exact path="/Biblioteca">
+          <Biblioteca />
         </Route>
         
         <Route exact path="/">
