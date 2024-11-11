@@ -32,9 +32,9 @@ const Home: React.FC = () => {
         <header className="navbar">
           <a href="/" className="navbar-logo">🏠</a>
           <nav className="navbar-links">
-            <a href="/test">Test de Estilos</a>
-            <a href="/materias">Materias</a>
-            <a href="/biblioteca">Biblioteca</a>
+            <a href="/Test">Test de Estilos</a>
+            <a href="/Materias">Materias</a>
+            <a href="/Biblioteca">Biblioteca</a>
           </nav>
           <button className="login-button" onClick={() => setIsLoginModalOpen(true)}>Iniciar sesión</button>
         </header>
