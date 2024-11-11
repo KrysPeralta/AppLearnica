@@ -4,6 +4,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import Test from './pages/Test';
 import Materias from './pages/Materias';
+import Grupos from './pages/Grupos';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -53,6 +54,10 @@ const App: React.FC = () => (
 
         <Route exact path="/materias">
           <Materias />
+        </Route>
+
+        <Route exact path="/grupos">
+          <Grupos />
         </Route>
         
         <Route exact path="/">
