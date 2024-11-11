@@ -1,4 +1,4 @@
-import { IonContent, IonPage } from '@ionic/react'; 
+import { IonContent, IonPage } from '@ionic/react';
 import './Test.css';
 
 import { useState } from 'react';
@@ -47,7 +47,7 @@ const Test: React.FC = () => {
 
         <h1 className="page-title">Test de Estilos de Aprendizaje</h1>
 
-        <div className="cards-container">
+        <div className="content-card-wrapper">
           <ContentCard 
             title="Test de Estilos ##" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
@@ -55,6 +55,8 @@ const Test: React.FC = () => {
             onEdit={() => handleEdit("Test de Estilos ##")}
             onDelete={() => handleDelete("Test de Estilos ##")}
           />
+          {/* Agrega más instancias de ContentCard según sea necesario */}
+
           <ContentCard 
             title="Test de Estilos ##" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
@@ -62,6 +64,8 @@ const Test: React.FC = () => {
             onEdit={() => handleEdit("Test de Estilos ##")}
             onDelete={() => handleDelete("Test de Estilos ##")}
           />
+          {/* Agrega más instancias de ContentCard según sea necesario */}
+
           <ContentCard 
             title="Test de Estilos ##" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
@@ -69,6 +73,8 @@ const Test: React.FC = () => {
             onEdit={() => handleEdit("Test de Estilos ##")}
             onDelete={() => handleDelete("Test de Estilos ##")}
           />
+          {/* Agrega más instancias de ContentCard según sea necesario */}
+
           <ContentCard 
             title="Test de Estilos ##" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
@@ -76,6 +82,8 @@ const Test: React.FC = () => {
             onEdit={() => handleEdit("Test de Estilos ##")}
             onDelete={() => handleDelete("Test de Estilos ##")}
           />
+          {/* Agrega más instancias de ContentCard según sea necesario */}
+
           <ContentCard 
             title="Test de Estilos ##" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
@@ -83,6 +91,8 @@ const Test: React.FC = () => {
             onEdit={() => handleEdit("Test de Estilos ##")}
             onDelete={() => handleDelete("Test de Estilos ##")}
           />
+          {/* Agrega más instancias de ContentCard según sea necesario */}
+
           <ContentCard 
             title="Test de Estilos ##" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
@@ -90,6 +100,8 @@ const Test: React.FC = () => {
             onEdit={() => handleEdit("Test de Estilos ##")}
             onDelete={() => handleDelete("Test de Estilos ##")}
           />
+          {/* Agrega más instancias de ContentCard según sea necesario */}
+          
         </div>
 
         <LoginModal 
@@ -108,4 +120,3 @@ const Test: React.FC = () => {
 };
 
 export default Test;
-

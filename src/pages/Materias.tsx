@@ -48,7 +48,7 @@ const Materias: React.FC = () => {
 
         <h1 className="page-title">Materias</h1>
 
-        <div className="cards-container">
+        <div className="content-card-wrapper">
           <ContentCard 
             title="Cálculo" 
             description="Profundiza en los conceptos avanzados de cálculo diferencial e integral."
@@ -109,4 +109,3 @@ const Materias: React.FC = () => {
 };
 
 export default Materias;
-

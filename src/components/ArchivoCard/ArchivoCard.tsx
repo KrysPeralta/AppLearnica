@@ -10,7 +10,6 @@ interface ArchivoCardProps {
 }
 
 const ArchivoCard: React.FC<ArchivoCardProps> = ({ title, description, type }) => {
-  // Selección del ícono basado en el tipo de archivo
   const getIcon = () => {
     switch (type) {
       case 'libro':
@@ -48,4 +47,5 @@ const ArchivoCard: React.FC<ArchivoCardProps> = ({ title, description, type }) =
 };
 
 export default ArchivoCard;
+
 

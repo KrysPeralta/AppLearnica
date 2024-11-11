@@ -16,8 +16,8 @@ const ContentCard: React.FC<ContentCardProps> = ({ title, description, imageUrl,
   const [popoverEvent, setPopoverEvent] = useState<React.MouseEvent | undefined>(undefined);
 
   const openPopover = (event: React.MouseEvent) => {
-    setPopoverEvent(event); // Guardar la posición del evento
-    setShowPopover(true);   // Mostrar el popover
+    setPopoverEvent(event);
+    setShowPopover(true);
   };
 
   return (
@@ -39,9 +39,9 @@ const ContentCard: React.FC<ContentCardProps> = ({ title, description, imageUrl,
         </IonButton>
         <IonPopover
           isOpen={showPopover}
-          event={popoverEvent ? popoverEvent.nativeEvent : undefined} // Verificar si popoverEvent está definido
+          event={popoverEvent ? popoverEvent.nativeEvent : undefined}
           onDidDismiss={() => setShowPopover(false)}
-          alignment="center" // Centrar el popover debajo del botón
+          alignment="center"
         >
           <IonItem button onClick={onEdit}>Editar</IonItem>
           <IonItem button onClick={onDelete}>Eliminar</IonItem>

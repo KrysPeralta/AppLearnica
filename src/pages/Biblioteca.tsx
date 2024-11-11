@@ -35,7 +35,7 @@ const Biblioteca: React.FC = () => {
 
         <h1 className="page-title">Biblioteca de Archivos</h1>
 
-        <div className="cards-container">
+        <div className="archivos-container">
           <ArchivoCard 
             title="Libro de Matemáticas" 
             description="Este libro contiene ejercicios y teoría avanzada de matemáticas."
@@ -61,7 +61,7 @@ const Biblioteca: React.FC = () => {
             description="Grabación de una clase de historia moderna."
             type="audio" 
           />
-        </div> {/* Cierre del contenedor de tarjetas */}
+        </div>
 
         <LoginModal 
           isOpen={isLoginModalOpen} 
@@ -79,6 +79,3 @@ const Biblioteca: React.FC = () => {
 };
 
 export default Biblioteca;
-
-
-

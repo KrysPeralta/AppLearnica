@@ -48,7 +48,7 @@ const Grupos: React.FC = () => {
 
         <h1 className="page-title">Grupos</h1>
 
-        <div className="cards-container">
+        <div className="content-card-wrapper">
           <ContentCard 
             title="Grupo A" 
             description="Grupo enfocado en el estudio avanzado de matemáticas."
@@ -109,5 +109,6 @@ const Grupos: React.FC = () => {
 };
 
 export default Grupos;
+
 
 
