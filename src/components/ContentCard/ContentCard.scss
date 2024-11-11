@@ -7,6 +7,16 @@
   overflow: hidden; /* Asegura que los bordes redondeados afecten a la imagen también */
 }
 
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+  gap: 20px; /* Espacio entre las tarjetas */
+  padding: 20px;
+  max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+  margin: 0 auto; /* Centrar el contenedor en la página */
+}
+
+
 .card-content {
   display: flex;
   flex-direction: row;

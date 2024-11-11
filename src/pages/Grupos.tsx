@@ -51,14 +51,14 @@ const Grupos: React.FC = () => {
         <div className="cards-container">
           <ContentCard 
             title="Grupo A" 
-            description="Grupo enfocado en el estudio avanzado de matemáticas aplicadas."
+            description="Grupo enfocado en el estudio avanzado de matemáticas."
             imageUrl="/src/assets/images/grupos/grupos_1.png"
             onEdit={() => handleEdit("Grupo A")}
             onDelete={() => handleDelete("Grupo A")}
           />
           <ContentCard 
             title="Grupo B" 
-            description="Estudio de habilidades verbales y comunicación efectiva."
+            description="Estudio de habilidades verbales."
             imageUrl="/src/assets/images/grupos/grupos_2.png"
             onEdit={() => handleEdit("Grupo B")}
             onDelete={() => handleDelete("Grupo B")}

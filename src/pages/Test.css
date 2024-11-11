@@ -36,7 +36,7 @@
   cursor: pointer;
 }
 
-/* Estilos para el título y contenedor de tarjetas */
+/* Estilos para el título */
 .page-title {
   text-align: center;
   font-size: 2rem;
@@ -45,11 +45,3 @@
   font-weight: bold;
 }
 
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-  gap: 20px; /* Espacio entre las tarjetas */
-  padding: 20px;
-  max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
-  margin: 0 auto; /* Centrar el contenedor en la página */
-}
