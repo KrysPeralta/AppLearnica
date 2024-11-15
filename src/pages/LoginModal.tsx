@@ -1,6 +1,7 @@
 // LoginModal.tsx
 import React from 'react';
 import { IonModal, IonInput, IonButton } from '@ionic/react';
+import { useHistory } from 'react-router-dom'; // Importa useHistory para redirigir
 import './LoginModal.css';
 
 interface LoginModalProps {
@@ -9,7 +10,15 @@ interface LoginModalProps {
   onSwitchToRegister: () => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToRegister}) => {
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToRegister }) => {
+  const history = useHistory(); // Hook para navegar entre páginas
+
+  // Función para redirigir a la página de Recuperación de Contraseña
+  const handlePasswordRecovery = () => {
+    onClose(); // Cierra el modal
+    history.push('/password-recovery'); // Redirige a la página de recuperación
+  };
+
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onClose}>
       {/* Contenedor principal del modal */}
@@ -24,7 +33,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSwitchToRegi
           <IonInput type="text" className="login-input" placeholder="Ingresa tu usuario" />
           <label>Contraseña</label>
           <IonInput type="password" className="login-input" placeholder="Ingresa tu contraseña" />
-          <a href="#" className="login-modal-recover">Recuperar Contraseña</a>
+          <a onClick={handlePasswordRecovery} className="login-modal-recover">
+            Recuperar Contraseña
+          </a>
         </div>
 
         {/* Botones de iniciar sesión y registrarse */}
