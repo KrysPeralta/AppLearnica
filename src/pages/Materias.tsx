@@ -44,6 +44,7 @@ const Materias: React.FC = () => {
             <a href="/Materias">Materias</a>
             <a href="/Grupos">Grupos</a>
             <a href="/Biblioteca">Biblioteca</a>
+            <a href="/Comentarios">Comentarios</a>          
           </nav>
           <button className="login-button" onClick={openLoginModal}>Iniciar sesión</button>
         </header>

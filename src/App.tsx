@@ -5,7 +5,10 @@ import Home from './pages/Home';
 import Test from './pages/Test';
 import Materias from './pages/Materias';
 import Grupos from './pages/Grupos';
-import CreateTest from './pages/CreateTest'; // Importa la nueva vista
+import CreateTest from './pages/CreateTest'; 
+import Comentarios from './pages/Comentarios'; 
+import Biblioteca from './pages/Biblioteca';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,7 +41,6 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './pages/Home.css';
-import Biblioteca from './pages/Biblioteca';
 
 setupIonicReact();
 
@@ -68,6 +70,10 @@ const App: React.FC = () => (
 
         <Route exact path="/biblioteca">
           <Biblioteca />
+        </Route>
+
+        <Route exact path="/Comentarios">
+          <Comentarios />
         </Route>
         
         <Route exact path="/">

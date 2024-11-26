@@ -43,7 +43,9 @@ const Test: React.FC = () => {
           <nav className="navbar-links">
             <a href="/Test">Test de Estilos</a>
             <a href="/Materias">Materias</a>
+            <a href="/Grupos">Grupos</a>
             <a href="/Biblioteca">Biblioteca</a>
+            <a href="/Comentarios">Comentarios</a>  
           </nav>
           <button className="login-button" onClick={() => setIsLoginModalOpen(true)}>Iniciar sesión</button>
         </header>
