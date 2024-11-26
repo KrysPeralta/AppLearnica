@@ -37,6 +37,20 @@ const ArchivoCard: React.FC<ArchivoCardProps> = ({ title, description, type, onE
     setShowPopover(true);
   };
 
+  const closePopover = () => {
+    setShowPopover(false);
+  };
+
+  const handleEdit = () => {
+    onEdit();
+    closePopover(); // Cierra el popover al seleccionar esta opción
+  };
+
+  const handleDelete = () => {
+    onDelete();
+    closePopover(); // Cierra el popover al seleccionar esta opción
+  };
+
   return (
     <IonCard className="archivo-card">
       <div className="card-content">
@@ -57,11 +71,11 @@ const ArchivoCard: React.FC<ArchivoCardProps> = ({ title, description, type, onE
         <IonPopover
           isOpen={showPopover}
           event={popoverEvent ? popoverEvent.nativeEvent : undefined}
-          onDidDismiss={() => setShowPopover(false)}
+          onDidDismiss={closePopover}
           alignment="center"
         >
-          <IonItem button onClick={onEdit}>Editar</IonItem>
-          <IonItem button onClick={onDelete}>Eliminar</IonItem>
+          <IonItem button onClick={handleEdit}>Editar</IonItem>
+          <IonItem button onClick={handleDelete}>Eliminar</IonItem>
         </IonPopover>
       </div>
     </IonCard>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonModal, IonInput, IonButton, IonContent } from '@ionic/react';
+import { IonModal, IonInput, IonButton, IonSelect, IonSelectOption } from '@ionic/react';
 import './RegisterModal.css';
 
 interface RegisterModalProps {
@@ -10,40 +10,55 @@ interface RegisterModalProps {
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onSwitchToLogin }) => {
   return (
-    <IonModal isOpen={isOpen} onDidDismiss={onClose}>
-        <div className="register-modal-content">
-
+    <IonModal isOpen={isOpen} onDidDismiss={onClose} className="register-modal">
+      {/* Contenedor principal del modal */}
+      <div className="register-modal-content">
+        {/* Ícono de registro */}
         <div className="register-modal-icon">📝</div>
-          
-          <div className="register-modal-inputs">
-            <h2>Registro</h2>
-            
-              <label>Nombre Completo</label>
-              <IonInput type="text" className="register-input" placeholder="Ingresa tu nombre completo" />
 
-              <label>Apellidos</label>
-              <IonInput type="text" className="register-input" placeholder="Ingresa tus apellidos" />
+        {/* Título del modal */}
+        <h2 className="register-modal-title">Registro</h2>
 
-              <label>Carrera</label>
-              <IonInput type="text" className="register-input" placeholder="Ingresa tu carrera" />
+        {/* Campos de entrada */}
+        <div className="register-modal-inputs">
+          <label>Nombre Completo</label>
+          <IonInput type="text" className="register-input" placeholder="Ingresa tu nombre completo" />
 
-              <label>Matrícula</label>
-              <IonInput type="text" className="register-input" placeholder="Ingresa tu matrícula" />
+          <label>Apellidos</label>
+          <IonInput type="text" className="register-input" placeholder="Ingresa tus apellidos" />
 
-              <label>Correo</label>
-              <IonInput type="email" className="register-input" placeholder="Ingresa tu correo electrónico" />
+          <label>Carrera</label>
+          <IonSelect 
+              placeholder="Selecciona tu carrera"
+              cancelText="Cancelar"
+              okText="Aceptar" 
+            className="select-carrera">
+              <IonSelectOption value="ingenieria">Ingeniería</IonSelectOption>
+              <IonSelectOption value="medicina">Medicina</IonSelectOption>
+              <IonSelectOption value="arquitectura">Arquitectura</IonSelectOption>
+              <IonSelectOption value="derecho">Derecho</IonSelectOption>
+              <IonSelectOption value="economia">Economía</IonSelectOption>
+ 
+          </IonSelect>
 
-              <label>Contraseña</label>
-              <IonInput type="password" className="register-input" placeholder="Crea una contraseña" />
-              </div>
+          <label>Matrícula</label>
+          <IonInput type="text" className="register-input" placeholder="Ingresa tu matrícula" />
 
-              <div className="register-modal-buttons">
-              <IonButton expand="block" onClick={onClose} className="register-button-primary">Registrarme</IonButton>
-              </div>
-            
-            <p className="switch-to-login" onClick={onSwitchToLogin}>¿Ya tienes una cuenta? Inicia sesión</p>
-          
+          <label>Correo</label>
+          <IonInput type="email" className="register-input" placeholder="Ingresa tu correo electrónico" />
+
+          <label>Contraseña</label>
+          <IonInput type="password" className="register-input" placeholder="Crea una contraseña" />
         </div>
+
+        {/* Botones de acción */}
+        <div className="register-modal-buttons">
+          <IonButton expand="block" onClick={onClose} className="register-button-primary">Registrarme</IonButton>
+        </div>
+            
+        <p>¿Ya tienes una cuenta?</p>
+        <a href="#" className="register-modal-recover">Iniciar sesión</a>
+      </div>
     </IonModal>
   );
 };

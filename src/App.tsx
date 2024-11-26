@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Test from './pages/Test';
 import Materias from './pages/Materias';
 import Grupos from './pages/Grupos';
+import CreateTest from './pages/CreateTest'; // Importa la nueva vista
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -53,6 +54,10 @@ const App: React.FC = () => (
           <Test />
         </Route>
 
+        <Route exact path="/create-test">
+          <CreateTest /> {/* Ruta para la vista de creación de test */}
+        </Route>
+
         <Route exact path="/materias">
           <Materias />
         </Route>
@@ -61,7 +66,7 @@ const App: React.FC = () => (
           <Grupos />
         </Route>
 
-        <Route exact path="/Biblioteca">
+        <Route exact path="/biblioteca">
           <Biblioteca />
         </Route>
         

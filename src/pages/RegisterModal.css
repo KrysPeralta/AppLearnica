@@ -1,53 +1,145 @@
-/* RegisterModal.css */
-
+/* General del modal */
 .register-modal-content {
-    padding: 20px;
-    text-align: center;
-    max-width: 400px;
-    margin: auto;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .register-modal-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .register-modal-inputs label {
-    font-size: 0.9rem;
-    color: #333;
-    margin-bottom: 5px;
-    display: block;
-    text-align: left;
-  }
-  
-  .register-modal-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .register-input {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .register-modal-buttons {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .register-button-primary {
-    background-color: #3880ff;
-    color: white;
-    font-weight: bold;
-    padding: 12px;
-    font-size: 1rem;
-    border-radius: 5px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 15; 
+  padding: 30px;
+  max-height: 90vh; /* Limitar altura máxima */
+  overflow-y: auto; /* Activar el scroll vertical */
+  scrollbar-width: thin; /* Estilizar el scroll en navegadores modernos */
+  scrollbar-color: #003366 #f0f0f0; /* Colores del scroll */
+}
+
+
+
+/* Personalización del scroll para navegadores basados en WebKit */
+.register-modal-content::-webkit-scrollbar {
+  width: 8px; /* Ancho del scroll */
+}
+
+.register-modal-content::-webkit-scrollbar-thumb {
+  background: #003366; /* Color del scroll */
+  border-radius: 10px; /* Bordes redondeados del thumb */
+}
+
+.register-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #0055aa; /* Color del scroll al pasar el mouse */
+}
+
+.register-modal-content::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Color del fondo del track */
+}
+
+
+
+/* Estilos adicionales para mantener consistencia */
+.register-modal-icon {
+  font-size: 4rem;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.register-modal-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.register-modal-inputs {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.register-modal-inputs label {
+  font-size: 1rem;
+  color: #333333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.register-input {
+  width: 100%;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.register-modal-recover {
+  font-size: 0.9rem;
+  color: #3333aa;
+  text-decoration: underline;
+  margin-bottom: 15px;
+  display: block;
+  text-align: right;
+}
+
+.register-modal-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-button-primary {
+  background-color: #003366;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.register-button-secondary {
+  color: #003366;
+  border-color: #003366;
+}
+
+
+
+/* Estilo general del select */
+.select-carrera {
+  width: 100%;
+  padding: 8px 12px; /* Ajustar el espacio interno */
+  font-size: 1rem;
+  font-family: 'Arial', sans-serif;
+  border: 1px solid #cccccc; /* Borde gris claro */
+  border-radius: 5px; /* Bordes ligeramente redondeados */
+  background-color: #ffffff; /* Fondo blanco */
+  color: #333333; /* Texto gris oscuro */
+  appearance: none; /* Elimina el estilo predeterminado del navegador */
+  margin-bottom: 15px; /* Separación inferior */
+  transition: border-color 0.3s ease; /* Animación para el borde */
+}
+
+/* Eliminación de la flecha predeterminada en navegadores modernos */
+.select-carrera::-ms-expand {
+  display: none; /* Para navegadores basados en Edge/Internet Explorer */
+}
+
+.select-carrera::-webkit-appearance {
+  appearance: none; /* Para navegadores basados en WebKit */
+}
+
+/* Hover */
+.select-carrera:hover {
+  border-color: #888888; /* Cambiar el color del borde al pasar el mouse */
+}
+
+/* Focus sin efectos adicionales */
+.select-carrera:focus {
+  outline: none; /* Elimina el contorno predeterminado */
+  border-color: #0055aa; /* Cambiar el borde al enfocar */
+}
+
+/* Opciones dentro del select */
+.select-carrera option {
+  font-size: 1rem;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+/* Hover sobre las opciones */
+.select-carrera option:hover {
+  background-color: #f8f8f8; /* Gris claro */
+}

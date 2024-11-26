@@ -43,5 +43,33 @@
   color: #2e3a47;
   margin-top: 20px;
   font-weight: bold;
+  margin-left: 80px; /* Ajusta este valor para moverlo más a la derecha */
 }
 
+/* Contenedor genérico para el título y el botón */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Mantiene el botón a la derecha */
+  align-items: center;
+  margin: 20px; /* Margen estándar para el contenedor */
+  padding-right: 20px; /* Opcional: Ajusta más espacio para el botón */
+}
+
+/* Botón "Crear Archivo" */
+.create-button {
+  margin-right: 55px; /* Ajusta este valor para moverlo más a la derecha */
+  background-color: #2e3a47; /* Color oscuro similar a la navbar */
+  color: #ffffff; /* Texto blanco */
+  padding: 8px 16px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño de texto */
+  font-weight: bold; /* Texto en negrita */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cursor de mano */
+  transition: background-color 0.3s ease; /* Animación suave */
+}
+
+/* Hover para el botón */
+.create-button:hover {
+  background-color: #1e2b37; /* Fondo más oscuro al pasar el mouse */
+}

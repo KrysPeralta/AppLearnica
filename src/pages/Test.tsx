@@ -2,6 +2,7 @@ import { IonContent, IonPage } from '@ionic/react';
 import './Test.css';
 
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom'; // Para navegación
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 import ContentCard from '../components/ContentCard/ContentCard'; // Importa el componente ContentCard
@@ -9,6 +10,7 @@ import ContentCard from '../components/ContentCard/ContentCard'; // Importa el c
 const Test: React.FC = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const history = useHistory(); // Hook para navegación
 
   const openRegisterModal = () => {
     setIsLoginModalOpen(false);
@@ -20,16 +22,17 @@ const Test: React.FC = () => {
     setIsLoginModalOpen(true);
   };
 
-  // Función para editar un grupo
-  const handleEdit = (title: string) => {
-    console.log(`Editar ${title}`);
-    // Aquí puedes agregar la lógica para abrir un modal de edición
+  // Función para redirigir a la página de creación de tests
+  const handleCreateTest = () => {
+    history.push('/create-test'); // Redirige a la página de creación del test
   };
 
-  // Función para eliminar un grupo
+  const handleEdit = (title: string) => {
+    console.log(`Editar ${title}`);
+  };
+
   const handleDelete = (title: string) => {
     console.log(`Eliminar ${title}`);
-    // Aquí puedes agregar la lógica para confirmar y eliminar el grupo
   };
 
   return (
@@ -45,63 +48,57 @@ const Test: React.FC = () => {
           <button className="login-button" onClick={() => setIsLoginModalOpen(true)}>Iniciar sesión</button>
         </header>
 
-        <h1 className="page-title">Test de Estilos de Aprendizaje</h1>
+        <div className="header-container">
+          <h1 className="page-title">Test de Estilos de Aprendizaje</h1>
+          <button className="create-button" onClick={handleCreateTest}>
+            Crear Test
+          </button>
+        </div>
 
         <div className="content-card-wrapper">
+          {/* Tus 6 tarjetas originales */}
           <ContentCard 
-            title="Test de Estilos ##" 
+            title="Test de Estilos 1" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
             imageUrl="/src/assets/images/test/test_1.png" 
-            onEdit={() => handleEdit("Test de Estilos ##")}
-            onDelete={() => handleDelete("Test de Estilos ##")}
+            onEdit={() => handleEdit("Test de Estilos 1")}
+            onDelete={() => handleDelete("Test de Estilos 1")}
           />
-          {/* Agrega más instancias de ContentCard según sea necesario */}
-
           <ContentCard 
-            title="Test de Estilos ##" 
+            title="Test de Estilos 2" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
             imageUrl="/src/assets/images/test/test_2.png" 
-            onEdit={() => handleEdit("Test de Estilos ##")}
-            onDelete={() => handleDelete("Test de Estilos ##")}
+            onEdit={() => handleEdit("Test de Estilos 2")}
+            onDelete={() => handleDelete("Test de Estilos 2")}
           />
-          {/* Agrega más instancias de ContentCard según sea necesario */}
-
           <ContentCard 
-            title="Test de Estilos ##" 
+            title="Test de Estilos 3" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
             imageUrl="/src/assets/images/test/test_3.png" 
-            onEdit={() => handleEdit("Test de Estilos ##")}
-            onDelete={() => handleDelete("Test de Estilos ##")}
+            onEdit={() => handleEdit("Test de Estilos 3")}
+            onDelete={() => handleDelete("Test de Estilos 3")}
           />
-          {/* Agrega más instancias de ContentCard según sea necesario */}
-
           <ContentCard 
-            title="Test de Estilos ##" 
+            title="Test de Estilos 4" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
             imageUrl="/src/assets/images/test/test_4.png" 
-            onEdit={() => handleEdit("Test de Estilos ##")}
-            onDelete={() => handleDelete("Test de Estilos ##")}
+            onEdit={() => handleEdit("Test de Estilos 4")}
+            onDelete={() => handleDelete("Test de Estilos 4")}
           />
-          {/* Agrega más instancias de ContentCard según sea necesario */}
-
           <ContentCard 
-            title="Test de Estilos ##" 
+            title="Test de Estilos 5" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
             imageUrl="/src/assets/images/test/test_5.png" 
-            onEdit={() => handleEdit("Test de Estilos ##")}
-            onDelete={() => handleDelete("Test de Estilos ##")}
+            onEdit={() => handleEdit("Test de Estilos 5")}
+            onDelete={() => handleDelete("Test de Estilos 5")}
           />
-          {/* Agrega más instancias de ContentCard según sea necesario */}
-
           <ContentCard 
-            title="Test de Estilos ##" 
+            title="Test de Estilos 6" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
             imageUrl="/src/assets/images/test/test_6.png" 
-            onEdit={() => handleEdit("Test de Estilos ##")}
-            onDelete={() => handleDelete("Test de Estilos ##")}
+            onEdit={() => handleEdit("Test de Estilos 6")}
+            onDelete={() => handleDelete("Test de Estilos 6")}
           />
-          {/* Agrega más instancias de ContentCard según sea necesario */}
-          
         </div>
 
         <LoginModal 
@@ -120,3 +117,4 @@ const Test: React.FC = () => {
 };
 
 export default Test;
+
