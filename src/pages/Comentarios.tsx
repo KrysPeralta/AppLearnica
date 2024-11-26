@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IonPage, IonContent } from '@ionic/react';
 import ComentarioCard from '../components/ComentarioCard/ComentarioCard';
+import ComentarioModal from './ComentarioModal'; // Ruta del modal
 import './Test.css';
 
 const ComentariosPage: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
+  const [currentComment, setCurrentComment] = useState<{
+    username: string;
+    comment: string;
+  } | null>(null); // Estado para el comentario que se edita
+
   const comentarios = [
     {
       avatarUrl: '/assets/images/user1.png',
@@ -37,12 +44,30 @@ const ComentariosPage: React.FC = () => {
     },
   ];
 
-  const handleEdit = (username: string) => {
-    console.log(`Editar comentario de ${username}`);
+  const openModalForCreate = () => {
+    setCurrentComment(null); // Limpiamos el estado para creación
+    setIsModalOpen(true);
   };
 
-  const handleDelete = (username: string) => {
-    console.log(`Eliminar comentario de ${username}`);
+  const openModalForEdit = (username: string, comment: string) => {
+    setCurrentComment({ username, comment }); // Establecemos el comentario a editar
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setCurrentComment(null); // Limpiamos el estado después de cerrar
+  };
+
+  const handleSaveComment = (username: string, comment: string) => {
+    if (currentComment) {
+      console.log(`Guardando cambios para ${username}: ${comment}`);
+      // Aquí puedes manejar la lógica de edición en tu backend o estado
+    } else {
+      console.log(`Creando un nuevo comentario: ${username}, ${comment}`);
+      // Aquí puedes manejar la lógica de creación en tu backend o estado
+    }
+    closeModal();
   };
 
   return (
@@ -61,9 +86,12 @@ const ComentariosPage: React.FC = () => {
           <button className="login-button">Iniciar sesión</button>
         </header>
 
-        {/* Título de la página */}
+        {/* Título y botón Agregar Comentario */}
         <div className="header-container">
           <h1 className="page-title">Preguntas y Respuestas</h1>
+          <button className="create-button" onClick={openModalForCreate}>
+            Agregar Comentario
+          </button>
         </div>
 
         {/* Contenedor de comentarios */}
@@ -74,11 +102,17 @@ const ComentariosPage: React.FC = () => {
               avatarUrl={comentario.avatarUrl}
               usuario={comentario.username}
               comentario={comentario.comment}
-              onEdit={() => handleEdit(comentario.username)}
-              onDelete={() => handleDelete(comentario.username)}
+              onEdit={() => openModalForEdit(comentario.username, comentario.comment)}
+              onDelete={() => console.log(`Eliminar comentario de ${comentario.username}`)}
             />
           ))}
         </div>
+
+        {/* Modal de Comentarios */}
+        <ComentarioModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        />
       </IonContent>
     </IonPage>
   );
