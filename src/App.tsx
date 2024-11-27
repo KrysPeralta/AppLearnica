@@ -8,6 +8,7 @@ import Grupos from './pages/Grupos';
 import CreateTest from './pages/CreateTest'; 
 import Comentarios from './pages/Comentarios'; 
 import Biblioteca from './pages/Biblioteca';
+import PerfilPage from './pages/PerfilPage';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -74,6 +75,10 @@ const App: React.FC = () => (
 
         <Route exact path="/Comentarios">
           <Comentarios />
+        </Route>
+
+        <Route exact path="/PerfilPage">
+          <PerfilPage />
         </Route>
         
         <Route exact path="/">

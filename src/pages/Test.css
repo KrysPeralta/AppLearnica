@@ -73,3 +73,45 @@
 .create-button:hover {
   background-color: #1e2b37; /* Fondo más oscuro al pasar el mouse */
 }
+
+/* Estilos específicos para la vista de Perfil */
+.perfil-container {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2e3a47;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.perfil-details p {
+  font-size: 1rem;
+  color: #555555;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.perfil-edit-button {
+  margin-top: 20px;
+  background-color: #2e3a47;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.perfil-edit-button:hover {
+  background-color: #1e2b37;
+}
