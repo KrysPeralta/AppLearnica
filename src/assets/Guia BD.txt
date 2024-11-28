@@ -1,0 +1,141 @@
+Basándome en el diseño de la base de datos que compartiste, aquí tienes una lista de formularios que podrían ser necesarios para gestionar los datos y realizar operaciones CRUD en tu sistema:
+
+---
+
+### **1. Gestión de usuarios y credenciales**
+- **Formulario de registro de usuario**:
+  - Campos: Email, contraseña, rol, datos personales (nombre, apellidos, grado de estudio, etc.).
+  - Relación: Tabla `credenciales_usuario` y `datos_usuario`.
+
+- **Formulario de inicio de sesión**:
+  - Campos: Email, contraseña.
+  - Relación: Tabla `credenciales_usuario`.
+
+- **Formulario de edición de perfil**:
+  - Campos: Actualización de datos personales (nombre, apellidos, grado de estudio).
+  - Relación: Tabla `datos_usuario`.
+
+---
+
+### **2. Gestión de alumnos**
+- **Formulario de registro de alumnos**:
+  - Campos: Nombre, credencial (email y contraseña), institución asociada.
+  - Relación: Tabla `alumnos`.
+
+- **Formulario de asignación de alumnos a clases**:
+  - Campos: Selección de alumno y clase.
+  - Relación: Tabla `clase_alumnos`.
+
+---
+
+### **3. Gestión de profesores**
+- **Formulario de registro de profesores**:
+  - Campos: Nombre, credencial, institución.
+  - Relación: Tabla `profesor`.
+
+- **Formulario de asignación de profesores a materias o clases**:
+  - Campos: Selección de profesor, materia o clase.
+  - Relación: Tablas `clases` y `tests_compartidos`.
+
+---
+
+### **4. Gestión de clases**
+- **Formulario de creación de clases**:
+  - Campos: Nombre, código, descripción, semestre, carrera, profesor responsable.
+  - Relación: Tabla `clases`.
+
+- **Formulario de edición de clases**:
+  - Campos: Los mismos que en el formulario de creación.
+  - Relación: Tabla `clases`.
+
+---
+
+### **5. Gestión de carreras e instituciones**
+- **Formulario de registro de carreras**:
+  - Campos: Nombre, descripción.
+  - Relación: Tabla `carreras`.
+
+- **Formulario de registro de instituciones**:
+  - Campos: Nombre, dirección.
+  - Relación: Tabla `instituciones`.
+
+- **Formulario de asignación de carreras a instituciones**:
+  - Campos: Selección de institución y carrera.
+  - Relación: Tabla `institucion_carrera`.
+
+---
+
+### **6. Gestión de tests y evaluaciones**
+- **Formulario de creación de tests**:
+  - Campos: Nombre, descripción, clase asociada, visibilidad.
+  - Relación: Tabla `tests`.
+
+- **Formulario de creación de preguntas**:
+  - Campos: Texto, orden, categoría.
+  - Relación: Tabla `preguntas`.
+
+- **Formulario de asignación de tests a clases**:
+  - Campos: Selección de test y clase.
+  - Relación: Tabla `test_clase`.
+
+- **Formulario de registro de respuestas de alumnos**:
+  - Campos: Selección de alumno, pregunta y respuesta.
+  - Relación: Tabla `respuestas_alumnos`.
+
+---
+
+### **7. Gestión de asistencias**
+- **Formulario de registro de asistencia**:
+  - Campos: Clase, alumno, fecha, estado (asistió o no).
+  - Relación: Tabla `asistencia`.
+
+---
+
+### **8. Gestión de foros**
+- **Formulario de creación de hilos de foro**:
+  - Campos: Título, contenido, clase asociada.
+  - Relación: Tabla `foros_hilos`.
+
+- **Formulario de publicación de respuestas en foros**:
+  - Campos: Selección del hilo, contenido de la respuesta.
+  - Relación: Tabla `foros_respuestas`.
+
+---
+
+### **9. Gestión de archivos y temas**
+- **Formulario de subida de archivos**:
+  - Campos: Tema asociado, tipo de archivo, archivo en sí, usuario que lo sube.
+  - Relación: Tabla `archivos`.
+
+- **Formulario de creación de temas**:
+  - Campos: Nombre, descripción.
+  - Relación: Tabla `temas`.
+
+---
+
+### **10. Gestión de calificaciones**
+- **Formulario de calificación de tests**:
+  - Campos: Alumno, test, calificación, fecha.
+  - Relación: Tabla `calificaciones_tests`.
+
+- **Formulario de evaluación de clases**:
+  - Campos: Clase, evaluación realizada, fecha de asignación.
+  - Relación: Tabla `evaluacion_clase`.
+
+---
+
+### **11. Gestión de avisos**
+- **Formulario de creación de avisos**:
+  - Campos: Título, contenido, clase asociada.
+  - Relación: Tabla `avisos`.
+
+---
+
+### **12. Gestión de categorías**
+- **Formulario de creación de categorías**:
+  - Campos: Nombre, descripción.
+  - Relación: Tabla `categorias`.
+
+---
+
+Si necesitas que profundice en alguno de estos formularios o te ayude a diseñar uno en particular, avísame.
