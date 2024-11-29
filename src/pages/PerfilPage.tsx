@@ -1,21 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { IonPage, IonContent, IonButton } from '@ionic/react';
+import { IonPage, IonContent, IonHeader, IonButton } from '@ionic/react';
+import { useSession } from '../context/SessionContext'; // Importar el contexto
 import { apiService } from '../services/apiService'; // Servicio configurado
-import './Test.css';
+import Navbar from '../components/navbar/Navbar'; // Importar correctamente el Navbar
+import './Test.css'; // Estilos específicos para PerfilPage
 
 const PerfilPage: React.FC = () => {
+  const { userId } = useSession(); // Obtener el ID del usuario desde el contexto
   const [perfil, setPerfil] = useState<any>(null); // Estado para los datos del perfil
   const [error, setError] = useState<string | null>(null); // Estado para manejar errores
 
   useEffect(() => {
-    fetchPerfil(3); // Llama a la API con el ID del usuario que quieras
-  }, []);
+    if (userId) {
+      fetchPerfil(userId); // Llama a la API con el ID del usuario desde el contexto
+    }
+  }, [userId]);
 
   // Función para obtener los datos del perfil desde la API
   const fetchPerfil = async (id: number) => {
     try {
-      const response = await apiService.getData('datos_usuario/', id); // Llama al servicio con el ID del usuario
-      setPerfil(response.data); // Guarda los datos en el estado
+      // Obtener datos del usuario
+      const perfilResponse = await apiService.getData('datos_usuario/', id);
+      const perfilData = perfilResponse.data;
+
+      // Obtener credenciales asociadas al usuario
+      const credencialResponse = await apiService.getData(
+        'credenciales_usuario/',
+        perfilData.fk_credencial
+      );
+      const credencialData = credencialResponse.data;
+
+      // Obtener datos de la institución
+      const institucionResponse = await apiService.getData(
+        'instituciones/',
+        perfilData.fk_institucion
+      );
+
+      // Combinar los datos en el estado del perfil
+      setPerfil({
+        ...perfilData,
+        correo: credencialData.email,
+        rol: credencialData.rol,
+        institucion: institucionResponse.data.nombre,
+      });
     } catch (err) {
       setError('No se pudo cargar la información del perfil');
       console.error(err);
@@ -29,20 +56,11 @@ const PerfilPage: React.FC = () => {
 
   return (
     <IonPage>
+      {/* Header con el Navbar */}
+      <IonHeader>
+        <Navbar /> {/* Navbar como parte del header */}
+      </IonHeader>
       <IonContent fullscreen>
-        {/* Barra de navegación */}
-        <header className="navbar">
-          <a href="/" className="navbar-logo">🏠</a>
-          <nav className="navbar-links">
-            <a href="/Test">Test de Estilos</a>
-            <a href="/Materias">Materias</a>
-            <a href="/Grupos">Grupos</a>
-            <a href="/Biblioteca">Biblioteca</a>
-            <a href="/Comentarios">Comentarios</a>
-          </nav>
-          <button className="login-button">Iniciar sesión</button>
-        </header>
-
         {/* Contenedor de información del perfil */}
         <div className="perfil-container">
           <h1 className="perfil-title">Mi Perfil</h1>
@@ -57,6 +75,9 @@ const PerfilPage: React.FC = () => {
               <p><strong>Apellido Paterno:</strong> {perfil.apellido_paterno}</p>
               <p><strong>Apellido Materno:</strong> {perfil.apellido_materno}</p>
               <p><strong>Teléfono:</strong> {perfil.telefono}</p>
+              <p><strong>Correo:</strong> {perfil.correo}</p>
+              <p><strong>Rol:</strong> {perfil.rol}</p>
+              <p><strong>Institución:</strong> {perfil.institucion}</p>
               <p><strong>Grado de Estudio:</strong> {perfil.grado_estudio}</p>
             </div>
           ) : (

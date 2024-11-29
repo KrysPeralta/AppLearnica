@@ -240,10 +240,6 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onSwitch
           </IonButton>
         </div>
 
-        <p>¿Ya tienes una cuenta?</p>
-        <a href="#" className="register-modal-recover" onClick={onSwitchToLogin}>
-          Iniciar sesión
-        </a>
       </div>
 
       <IonToast

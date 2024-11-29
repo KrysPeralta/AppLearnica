@@ -6,40 +6,34 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './Home.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Navbar from '../components/navbar/Navbar';
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 
 const Home: React.FC = () => {
-
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
-  const openRegisterModal = () => {
-    setIsLoginModalOpen(false); // Cerrar el Modal de Login si está abierto
-    setIsRegisterModalOpen(true);
-  };
+  // Manejo de eventos globales para abrir modales
+  useEffect(() => {
+    const openLoginHandler = () => setIsLoginModalOpen(true);
+    const openRegisterHandler = () => setIsRegisterModalOpen(true);
 
-  const openLoginModal = () => {
-    setIsRegisterModalOpen(false); // Cerrar el Modal de Registro si está abierto
-    setIsLoginModalOpen(true);
-  };
+    window.addEventListener('open-login-modal', openLoginHandler);
+    window.addEventListener('open-register-modal', openRegisterHandler);
+
+    return () => {
+      window.removeEventListener('open-login-modal', openLoginHandler);
+      window.removeEventListener('open-register-modal', openRegisterHandler);
+    };
+  }, []);
 
   return (
     <IonPage>
       <IonContent fullscreen>
         {/* Barra de navegación */}
-        <header className="navbar">
-          <a href="/" className="navbar-logo">🏠</a>
-          <nav className="navbar-links">
-            <a href="/Test">Test de Estilos</a>
-            <a href="/Materias">Materias</a>
-            <a href="/Grupos">Grupos</a>
-            <a href="/Biblioteca">Biblioteca</a>
-            <a href="/Comentarios">Comentarios</a>  
-          </nav>
-          <button className="login-button" onClick={() => setIsLoginModalOpen(true)}>Iniciar sesión</button>
-        </header>
+        <Navbar />
 
         {/* Carrusel de imágenes con Swiper */}
         <div className="carousel">
@@ -63,20 +57,18 @@ const Home: React.FC = () => {
           </Swiper>
         </div>
 
-        
         {/* Modales */}
         <LoginModal 
           isOpen={isLoginModalOpen} 
           onClose={() => setIsLoginModalOpen(false)}
-          onSwitchToRegister={openRegisterModal} 
+          onSwitchToRegister={() => setIsRegisterModalOpen(true)} 
         />
 
         <RegisterModal 
           isOpen={isRegisterModalOpen} 
           onClose={() => setIsRegisterModalOpen(false)} 
-          onSwitchToLogin={openLoginModal} 
+          onSwitchToLogin={() => setIsLoginModalOpen(true)} 
         />
-
       </IonContent>
     </IonPage>
   );
