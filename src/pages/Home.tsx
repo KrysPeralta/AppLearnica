@@ -1,3 +1,5 @@
+//EL NOMBRE DEL ARCHIVO ES: Home.tsx
+
 import { IonContent, IonPage } from '@ionic/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';

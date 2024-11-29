@@ -1,3 +1,4 @@
+//EL NOMBRE DEL ARCHIVO ES: LoginModal.tsx
 import React, { useState } from 'react';
 import { IonModal, IonInput, IonButton, IonToast } from '@ionic/react';
 import { useSession } from '../context/SessionContext'; // Importar el contexto

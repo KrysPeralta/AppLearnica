@@ -1,111 +1,139 @@
-import { IonContent, IonPage } from '@ionic/react';
+import { IonContent, IonPage, IonHeader } from '@ionic/react';
 import './Test.css';
 
-import { useState } from 'react';
-import LoginModal from './LoginModal';
-import ArchivoModal from './ArchivoModal'; // Asegúrate de que la ruta sea correcta
-import ArchivoCard from '../components/ArchivoCard/ArchivoCard'; // Asegúrate de que la ruta sea correcta
+import { useState, useEffect } from 'react';
+import Navbar from '../components/navbar/Navbar';
+import ArchivoModal from './ArchivoModal';
+import ArchivoCard from '../components/ArchivoCard/ArchivoCard';
+import LoginModal from './LoginModal'; // Importar el modal de login
+import RegisterModal from './RegisterModal'; // Importar el modal de registro
+import { useSession } from '../context/SessionContext'; // Hook para manejar la sesión
+import { apiService } from '../services/apiService';
 
 const Biblioteca: React.FC = () => {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isArchivoModalOpen, setIsArchivoModalOpen] = useState(false);
-  const [editingArchivo, setEditingArchivo] = useState<string | null>(null); // Para editar archivo
+  const { userId } = useSession(); // Obtener el ID del usuario
+  const [archivos, setArchivos] = useState<any[]>([]); // Archivos
+  const [isArchivoModalOpen, setIsArchivoModalOpen] = useState(false); // Modal de archivos
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // Modal de login
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); // Modal de registro
+  const [editingArchivo, setEditingArchivo] = useState<{
+    id?: number;
+    type: string;
+    url: string;
+    fk_tema?: number;
+  } | null>(null);
 
-  const openLoginModal = () => {
-    setIsLoginModalOpen(true);
+  // Cargar archivos desde la API
+  const fetchArchivos = async () => {
+    try {
+      const response = await apiService.getData('archivos/');
+      const archivosData = response.data.map((archivo: any) => ({
+        id: archivo.pk_archivo_id,
+        type: archivo.tipo_archivo,
+        url: archivo.url_archivo,
+        fk_tema: archivo.fk_tema,
+      }));
+      setArchivos(archivosData);
+    } catch (error) {
+      console.error('Error al cargar archivos:', error);
+    }
   };
 
-  const closeLoginModal = () => {
-    setIsLoginModalOpen(false);
-  };
+  // Manejar eventos globales para abrir los modales
+  useEffect(() => {
+    const openLoginHandler = () => setIsLoginModalOpen(true);
+    const openRegisterHandler = () => setIsRegisterModalOpen(true);
 
-  const openArchivoModal = (archivoTitle: string | null = null) => {
-    setEditingArchivo(archivoTitle); // Si es null, significa que se creará un archivo nuevo
+    window.addEventListener('open-login-modal', openLoginHandler);
+    window.addEventListener('open-register-modal', openRegisterHandler);
+
+    return () => {
+      window.removeEventListener('open-login-modal', openLoginHandler);
+      window.removeEventListener('open-register-modal', openRegisterHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    fetchArchivos();
+  }, []);
+
+  const openArchivoModal = (archivo: any = null) => {
+    setEditingArchivo(archivo);
     setIsArchivoModalOpen(true);
   };
 
   const closeArchivoModal = () => {
-    setEditingArchivo(null); // Reiniciar estado
+    setEditingArchivo(null);
     setIsArchivoModalOpen(false);
   };
 
-  const handleDelete = (title: string) => {
-    console.log(`Eliminar: ${title}`);
-    // Aquí puedes agregar lógica para eliminar el archivo
+  const handleDelete = async (id: number) => {
+    try {
+      await apiService.deleteData('archivos/', id);
+      fetchArchivos();
+    } catch (error) {
+      console.error('Error al eliminar el archivo:', error);
+    }
   };
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        {/* Barra de navegación */}
-        <header className="navbar">
-          <a href="/" className="navbar-logo">🏠</a>
-          <nav className="navbar-links">
-            <a href="/Test">Test de Estilos</a>
-            <a href="/Materias">Materias</a>
-            <a href="/Grupos">Grupos</a>
-            <a href="/Biblioteca">Biblioteca</a>
-            <a href="/Comentarios">Comentarios</a>  
-          </nav>
-          <button className="login-button" onClick={openLoginModal}>Iniciar sesión</button>
-        </header>
+      {/* Header con Navbar */}
+      <IonHeader>
+        <Navbar />
+      </IonHeader>
 
-        {/* Título y botón Crear Archivo */}
+      <IonContent fullscreen>
+        {/* Título y botón para crear un archivo */}
         <div className="header-container">
           <h1 className="page-title">Biblioteca de Archivos</h1>
-          <button className="create-button" onClick={() => openArchivoModal(null)}>
-            Crear Archivo
-          </button>
+          {userId && (
+            <button className="create-button" onClick={() => openArchivoModal()}>
+              Crear Archivo
+            </button>
+          )}
         </div>
 
         {/* Lista de archivos */}
         <div className="archivos-container">
-          <ArchivoCard 
-            title="Libro de Matemáticas" 
-            description="Este libro contiene ejercicios y teoría avanzada de matemáticas."
-            type="libro" 
-            onEdit={() => openArchivoModal("Libro de Matemáticas")}
-            onDelete={() => handleDelete("Libro de Matemáticas")}
-          />
-          <ArchivoCard 
-            title="Video de Ciencia" 
-            description="Una breve introducción a los conceptos básicos de la física cuántica."
-            type="video" 
-            onEdit={() => openArchivoModal("Video de Ciencia")}
-            onDelete={() => handleDelete("Video de Ciencia")}
-          />
-          <ArchivoCard 
-            title="PDF de Referencia" 
-            description="Documento PDF con los detalles del proyecto."
-            type="pdf" 
-            onEdit={() => openArchivoModal("PDF de Referencia")}
-            onDelete={() => handleDelete("PDF de Referencia")}
-          />
-          <ArchivoCard 
-            title="Enlace Externo" 
-            description="Visita nuestro blog para más información."
-            type="link" 
-            onEdit={() => openArchivoModal("Enlace Externo")}
-            onDelete={() => handleDelete("Enlace Externo")}
-          />
-          <ArchivoCard 
-            title="Audio de Historia" 
-            description="Grabación de una clase de historia moderna."
-            type="audio" 
-            onEdit={() => openArchivoModal("Audio de Historia")}
-            onDelete={() => handleDelete("Audio de Historia")}
-          />
+          {archivos.map((archivo) => (
+            <ArchivoCard
+              key={archivo.id}
+              type={archivo.type}
+              fileUrl={archivo.url}
+              onEdit={() => openArchivoModal(archivo)}
+              onDelete={() => handleDelete(archivo.id)}
+            />
+          ))}
         </div>
 
-        {/* Modales */}
-        <LoginModal 
-          isOpen={isLoginModalOpen} 
-          onClose={closeLoginModal} 
-          onSwitchToRegister={() => console.log("Switch to Register")} 
+        {/* Modal para crear o editar archivos */}
+        <ArchivoModal
+          isOpen={isArchivoModalOpen}
+          onClose={closeArchivoModal}
+          archivo={editingArchivo}
+          onArchivoSaved={fetchArchivos}
+          userId={userId} // Pasar el ID del usuario al modal
         />
-        <ArchivoModal 
-          isOpen={isArchivoModalOpen} 
-          onClose={closeArchivoModal} 
+
+        {/* Modal de inicio de sesión */}
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+          onSwitchToRegister={() => {
+            setIsLoginModalOpen(false);
+            setIsRegisterModalOpen(true);
+          }}
+        />
+
+        {/* Modal de registro */}
+        <RegisterModal
+          isOpen={isRegisterModalOpen}
+          onClose={() => setIsRegisterModalOpen(false)}
+          onSwitchToLogin={() => {
+            setIsRegisterModalOpen(false);
+            setIsLoginModalOpen(true);
+          }}
         />
       </IonContent>
     </IonPage>
