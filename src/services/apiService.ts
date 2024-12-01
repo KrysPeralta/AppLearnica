@@ -1,7 +1,7 @@
 //EL NOMBRE DEL ARCHIVO ES: apiService.ts
 import axios from 'axios';
 
-const BASE_URL = 'http://18.118.9.35:8000/api/'; // URL base de la API
+const BASE_URL = 'http://3.143.125.121:8000/api/'; // URL base de la API
 
 // Configuración global de Axios
 const apiClient = axios.create({
