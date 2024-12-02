@@ -1,0 +1,56 @@
+.archivos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.archivo-card {
+  background-color: #e3e3e3;
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  align-items: center;
+  gap: 15px;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.icon-section {
+  flex: 0 0 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: #1e3a8a; /* Ahora coincide con el color del link */
+}
+
+.text-section {
+  flex: 1;
+}
+
+.text-section h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1e3a8a;
+  margin: 0;
+}
+
+.text-section p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}
+
+
+  

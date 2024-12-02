@@ -1,0 +1,118 @@
+/* EL NOMBRE DEL ARCHIVO ES: Test.css */
+/* Estilos para la barra de navegación */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2e3a47; /* Ajuste de color según la imagen de referencia */
+  padding: 10px 20px;
+  color: #ffffff;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-links a {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+.login-button {
+  background-color: #ffffff;
+  color: #2e3a47;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estilos para el título */
+.page-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #2e3a47;
+  margin-top: 20px;
+  font-weight: bold;
+  margin-left: 80px; /* Ajusta este valor para moverlo más a la derecha */
+}
+
+/* Contenedor genérico para el título y el botón */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Mantiene el botón a la derecha */
+  align-items: center;
+  margin: 20px; /* Margen estándar para el contenedor */
+  padding-right: 20px; /* Opcional: Ajusta más espacio para el botón */
+}
+
+/* Botón "Crear Archivo" */
+.create-button {
+  margin-right: 55px; /* Ajusta este valor para moverlo más a la derecha */
+  background-color: #2e3a47; /* Color oscuro similar a la navbar */
+  color: #ffffff; /* Texto blanco */
+  padding: 8px 16px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño de texto */
+  font-weight: bold; /* Texto en negrita */
+  border: none; /* Sin borde */
+  cursor: pointer; /* Cursor de mano */
+  transition: background-color 0.3s ease; /* Animación suave */
+}
+
+/* Hover para el botón */
+.create-button:hover {
+  background-color: #1e2b37; /* Fondo más oscuro al pasar el mouse */
+}
+
+/* Estilos específicos para la vista de Perfil */
+.perfil-container {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2e3a47;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.perfil-details p {
+  font-size: 1rem;
+  color: #555555;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.perfil-edit-button {
+  margin-top: 20px;
+  background-color: #2e3a47;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.perfil-edit-button:hover {
+  background-color: #1e2b37;
+}

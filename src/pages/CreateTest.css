@@ -1,0 +1,195 @@
+/* Estilos para la barra de navegación */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2e3a47; /* Ajuste de color según la imagen de referencia */
+    padding: 10px 20px;
+    color: #ffffff;
+  }
+  
+  .navbar-logo {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #ffffff;
+  }
+  
+  .navbar-links {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .navbar-links a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 15px;
+  }
+  
+  .login-button {
+    background-color: #ffffff;
+    color: #2e3a47;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Estilos para el título */
+  .page-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #2e3a47;
+    margin-top: 20px;
+    font-weight: bold;
+    margin-left: 80px; /* Ajusta este valor para moverlo más a la derecha */
+  }
+  
+  /* Contenedor genérico para el título y el botón */
+  .header-container {
+    display: flex;
+    justify-content: space-between; /* Mantiene el botón a la derecha */
+    align-items: center;
+    margin: 20px; /* Margen estándar para el contenedor */
+    padding-right: 20px; /* Opcional: Ajusta más espacio para el botón */
+  }
+  
+  /* Botón "Crear Archivo" */
+  .create-button {
+    margin-right: 55px; /* Ajusta este valor para moverlo más a la derecha */
+    background-color: #2e3a47; /* Color oscuro similar a la navbar */
+    color: #ffffff; /* Texto blanco */
+    padding: 8px 16px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 1rem; /* Tamaño de texto */
+    font-weight: bold; /* Texto en negrita */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor de mano */
+    transition: background-color 0.3s ease; /* Animación suave */
+  }
+  
+  /* Hover para el botón */
+  .create-button:hover {
+    background-color: #1e2b37; /* Fondo más oscuro al pasar el mouse */
+  }
+
+
+
+
+
+
+
+
+/* Contenedor general del formulario */
+.form-container {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  /* Estilo para el título y descripción del Test */
+  .form-container .form-header {
+    margin-bottom: 20px;
+  }
+  
+  .form-header .form-input,
+  .form-header .form-textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Sección de preguntas */
+  .questions-container {
+    margin-top: 30px;
+  }
+  
+  .question-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  /* Estilo de las opciones */
+  .options-container {
+    margin-top: 15px;
+  }
+  
+  .option-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .option-item .option-input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .option-item .delete-option {
+    background-color: #d9534f;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Botón para agregar opciones */
+  .add-option-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-option-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Botones de acción al final */
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .action-buttons .action-button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .action-buttons .save-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .action-buttons .cancel-button {
+    background-color: #f8f9fa;
+    color: black;
+  }
+  
