@@ -55,6 +55,47 @@
   width: 100%;
 }
 
+.carousel-slide {
+  position: relative;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+}
+
+.carousel-overlay h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.carousel-overlay p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.carousel-button {
+  background-color: #ffffff;
+  color: #003366;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.carousel-button:hover {
+  background-color: #f0f0f0;
+}
+
 .swiper-button-prev,
 .swiper-button-next {
   color: #ffffff;
@@ -67,4 +108,82 @@
 
 .swiper-pagination-bullet-active {
   background: #ffffff;
+}
+
+
+/* Estilos para la sección de servicios */
+.services {
+  padding: 20px;
+  background-color: #f7f7f7;
+  text-align: center;
+}
+
+.services-title {
+  font-size: 2rem;
+  color: #003366;
+  margin-bottom: 20px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.service-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.service-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.service-card h3 {
+  font-size: 1.2rem;
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: #666666;
+}
+
+/* Estilos para la sección de llamada a la acción */
+.cta {
+  padding: 40px 20px;
+  background-color: #003366;
+  color: #ffffff;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.cta p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  background-color: #ffffff;
+  color: #003366;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: #f7f7f7;
 }

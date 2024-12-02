@@ -63,7 +63,6 @@ const Test: React.FC = () => {
         <div className="header-container">
           <h1 className="page-title">Evaluaciones Disponibles</h1>
         </div>
-
         {/* Tarjetas de evaluaciones */}
         <div className="test-card-wrapper">
           {Array.isArray(evaluaciones) && evaluaciones.length > 0 ? (

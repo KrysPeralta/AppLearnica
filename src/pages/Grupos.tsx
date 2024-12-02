@@ -64,42 +64,42 @@ const Grupos: React.FC = () => {
           <ContentCard 
             title="Grupo A" 
             description="Grupo enfocado en el estudio avanzado de matemáticas."
-            imageUrl="/src/assets/images/grupos/grupos_1.png"
+            imageUrl="/assets/images/grupos/grupos_1.png"
             onEdit={() => openGruposModal("Grupo A")}
             onDelete={() => handleDelete("Grupo A")}
           />
           <ContentCard 
             title="Grupo B" 
             description="Estudio de habilidades verbales."
-            imageUrl="/src/assets/images/grupos/grupos_2.png"
+            imageUrl="/assets/images/grupos/grupos_2.png"
             onEdit={() => openGruposModal("Grupo B")}
             onDelete={() => handleDelete("Grupo B")}
           />
           <ContentCard 
             title="Grupo C" 
             description="Fundamentos y configuración de redes de computadoras."
-            imageUrl="/src/assets/images/grupos/grupos_3.png"
+            imageUrl="/assets/images/grupos/grupos_3.png"
             onEdit={() => openGruposModal("Grupo C")}
             onDelete={() => handleDelete("Grupo C")}
           />
           <ContentCard 
             title="Grupo D" 
             description="Introducción y prácticas en programación básica y avanzada."
-            imageUrl="/src/assets/images/grupos/grupos_4.png"
+            imageUrl="/assets/images/grupos/grupos_4.png"
             onEdit={() => openGruposModal("Grupo D")}
             onDelete={() => handleDelete("Grupo D")}
           />
           <ContentCard 
             title="Grupo E" 
             description="Grupo dedicado a la exploración de conceptos en química."
-            imageUrl="/src/assets/images/grupos/grupos_5.png"
+            imageUrl="/assets/images/grupos/grupos_5.png"
             onEdit={() => openGruposModal("Grupo E")}
             onDelete={() => handleDelete("Grupo E")}
           />
           <ContentCard 
             title="Grupo F" 
             description="Estudio del diseño arquitectónico y su aplicación práctica."
-            imageUrl="/src/assets/images/grupos/grupos_6.png"
+            imageUrl="/assets/images/grupos/grupos_6.png"
             onEdit={() => openGruposModal("Grupo F")}
             onDelete={() => handleDelete("Grupo F")}
           />

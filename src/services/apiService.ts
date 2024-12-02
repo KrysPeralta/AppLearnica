@@ -1,6 +1,6 @@
 //EL NOMBRE DEL ARCHIVO ES: apiService.ts
 import axios from 'axios';
-
+//COMENTARIO DE PRUEBA
 const BASE_URL = 'https://learnicapi.duckdns.org/api/'; // URL base de la API
 
 // Configuración global de Axios
