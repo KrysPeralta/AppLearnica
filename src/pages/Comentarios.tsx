@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { IonPage, IonContent } from '@ionic/react';
+import Navbar from '../components/navbar/Navbar'; // Barra de navegación
 import ComentarioCard from '../components/ComentarioCard/ComentarioCard';
-import ComentarioModal from './ComentarioModal'; // Ruta del modal
+import ComentarioModal from './ComentarioModal'; // Tu modal original
 import './Test.css';
 
 const ComentariosPage: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal de comentarios
   const [currentComment, setCurrentComment] = useState<{
     username: string;
     comment: string;
@@ -27,21 +28,6 @@ const ComentariosPage: React.FC = () => {
       username: 'Usuario 3',
       comment: 'Un tercer comentario con más texto para el usuario 3.',
     },
-    {
-      avatarUrl: '/assets/images/user3.png',
-      username: 'Usuario 4',
-      comment: 'Un tercer comentario con más texto para el usuario 3.',
-    },
-    {
-      avatarUrl: '/assets/images/user3.png',
-      username: 'Usuario 5',
-      comment: 'Un tercer comentario con más texto para el usuario 3.',
-    },
-    {
-      avatarUrl: '/assets/images/user3.png',
-      username: 'Usuario 6',
-      comment: 'Un tercer comentario con más texto para el usuario 3.',
-    },
   ];
 
   const openModalForCreate = () => {
@@ -59,32 +45,11 @@ const ComentariosPage: React.FC = () => {
     setCurrentComment(null); // Limpiamos el estado después de cerrar
   };
 
-  const handleSaveComment = (username: string, comment: string) => {
-    if (currentComment) {
-      console.log(`Guardando cambios para ${username}: ${comment}`);
-      // Aquí puedes manejar la lógica de edición en tu backend o estado
-    } else {
-      console.log(`Creando un nuevo comentario: ${username}, ${comment}`);
-      // Aquí puedes manejar la lógica de creación en tu backend o estado
-    }
-    closeModal();
-  };
-
   return (
     <IonPage>
       <IonContent fullscreen>
         {/* Barra de navegación */}
-        <header className="navbar">
-          <a href="/" className="navbar-logo">🏠</a>
-          <nav className="navbar-links">
-            <a href="/Test">Test de Estilos</a>
-            <a href="/Materias">Materias</a>
-            <a href="/Grupos">Grupos</a>
-            <a href="/Biblioteca">Biblioteca</a>
-            <a href="/Comentarios">Comentarios</a>
-          </nav>
-          <button className="login-button">Iniciar sesión</button>
-        </header>
+        <Navbar />
 
         {/* Título y botón Agregar Comentario */}
         <div className="header-container">
