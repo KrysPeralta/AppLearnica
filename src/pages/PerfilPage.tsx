@@ -1,40 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { IonPage, IonContent, IonHeader, IonButton } from '@ionic/react';
-import { useSession } from '../context/SessionContext'; // Importar el contexto
-import { apiService } from '../services/apiService'; // Servicio configurado
-import Navbar from '../components/navbar/Navbar'; // Importar correctamente el Navbar
-import PerfilModal from './PerfilModal'; // Importar el modal
-import './Test.css'; // Estilos específicos para PerfilPage
+import { useSession } from '../context/SessionContext'; // Contexto para sesión
+import { apiService } from '../services/apiService'; // Servicio API
+import Navbar from '../components/navbar/Navbar'; // Navbar
+import PerfilModal from './PerfilModal'; // Modal del perfil
+import './Test.css'; // Estilos específicos
 
 const PerfilPage: React.FC = () => {
-  const { userId } = useSession(); // Obtener el ID del usuario desde el contexto
-  const [perfil, setPerfil] = useState<any>(null); // Estado para los datos del perfil
-  const [error, setError] = useState<string | null>(null); // Estado para manejar errores
+  const { userId } = useSession(); // ID del usuario desde el contexto
+  const [perfil, setPerfil] = useState<any>(null); // Datos del perfil
+  const [error, setError] = useState<string | null>(null); // Errores
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para abrir/cerrar el modal
 
   useEffect(() => {
     if (userId) {
-      fetchPerfil(userId); // Llama a la API con el ID del usuario desde el contexto
+      fetchPerfil(userId); // Cargar los datos del perfil al iniciar
     }
   }, [userId]);
 
   // Función para obtener los datos del perfil desde la API
   const fetchPerfil = async (id: number) => {
     try {
-      // Obtener datos del usuario
-      const perfilResponse = await apiService.getData('datos_usuario/', id);
+      const perfilResponse = await apiService.getData(`datos_usuario/`, id);
       const perfilData = perfilResponse.data;
 
       // Obtener credenciales asociadas al usuario
       const credencialResponse = await apiService.getData(
-        'credenciales_usuario/',
+        `credenciales_usuario/`,
         perfilData.fk_credencial
       );
       const credencialData = credencialResponse.data;
 
       // Obtener datos de la institución
       const institucionResponse = await apiService.getData(
-        'instituciones/',
+        `instituciones/`,
         perfilData.fk_institucion
       );
 
@@ -59,21 +58,21 @@ const PerfilPage: React.FC = () => {
     setIsModalOpen(false); // Cerrar el modal
   };
 
+  const handleSave = (updatedData: any) => {
+    setPerfil({ ...perfil, ...updatedData }); // Actualizar el estado local con los nuevos datos
+  };
+
   return (
     <IonPage>
-      {/* Header con el Navbar */}
       <IonHeader>
-        <Navbar /> {/* Navbar como parte del header */}
+        <Navbar />
       </IonHeader>
       <IonContent fullscreen>
-        {/* Contenedor de información del perfil */}
         <div className="perfil-container">
           <h1 className="perfil-title">Mi Perfil</h1>
 
-          {/* Muestra un mensaje de error si falla la carga */}
           {error && <p className="error-message">{error}</p>}
 
-          {/* Muestra los datos del perfil si están disponibles */}
           {perfil ? (
             <div className="perfil-details">
               <p><strong>Nombre:</strong> {perfil.nombre}</p>
@@ -94,8 +93,14 @@ const PerfilPage: React.FC = () => {
           </IonButton>
         </div>
 
-        {/* PerfilModal */}
-        <PerfilModal isOpen={isModalOpen} onClose={closeModal} />
+        {perfil && (
+          <PerfilModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            perfilData={perfil}
+            onSave={handleSave}
+          />
+        )}
       </IonContent>
     </IonPage>
   );
