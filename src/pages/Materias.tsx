@@ -60,42 +60,42 @@ const Materias: React.FC = () => {
           <ContentCard 
             title="Cálculo" 
             description="Profundiza en los conceptos avanzados de cálculo diferencial e integral."
-            imageUrl="/src/assets/images/materias/materia_1.png"
+            imageUrl="/assets/images/materias/materia_1.png"
             onEdit={() => openMateriaModal("Cálculo")}
             onDelete={() => handleDelete("Cálculo")}
           />
           <ContentCard 
             title="Habilidad Verbal" 
             description="Mejora tus habilidades lingüísticas y de comprensión verbal."
-            imageUrl="/src/assets/images/materias/materia_2.png"
+            imageUrl="/assets/images/materias/materia_2.png"
             onEdit={() => openMateriaModal("Habilidad Verbal")}
             onDelete={() => handleDelete("Habilidad Verbal")}
           />
           <ContentCard 
             title="Redes" 
             description="Aprende los fundamentos de las redes de computadoras y su configuración."
-            imageUrl="/src/assets/images/materias/materia_3.png"
+            imageUrl="/assets/images/materias/materia_3.png"
             onEdit={() => openMateriaModal("Redes")}
             onDelete={() => handleDelete("Redes")}
           />
           <ContentCard 
             title="Programación" 
             description="Domina los principios de la programación en diversos lenguajes."
-            imageUrl="/src/assets/images/materias/materia_4.png"
+            imageUrl="/assets/images/materias/materia_4.png"
             onEdit={() => openMateriaModal("Programación")}
             onDelete={() => handleDelete("Programación")}
           />
           <ContentCard 
             title="Química" 
             description="Explora las propiedades y transformaciones de la materia."
-            imageUrl="/src/assets/images/materias/materia_5.png"
+            imageUrl="/assets/images/materias/materia_5.png"
             onEdit={() => openMateriaModal("Química")}
             onDelete={() => handleDelete("Química")}
           />
           <ContentCard 
             title="Diseño Arquitectónico" 
             description="Descubre los fundamentos del diseño y la planificación arquitectónica."
-            imageUrl="/src/assets/images/materias/materia_6.png"
+            imageUrl="/assets/images/materias/materia_6.png"
             onEdit={() => openMateriaModal("Diseño Arquitectónico")}
             onDelete={() => handleDelete("Diseño Arquitectónico")}
           />

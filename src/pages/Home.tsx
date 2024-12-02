@@ -48,13 +48,13 @@ const Home: React.FC = () => {
             className="carousel-swiper"
           >
             <SwiperSlide>
-              <img src="src/assets/images/img1.jpg" alt="Slide 1" className="carousel-image" />
+              <img src="/assets/images/img1.jpg" alt="Slide 1" className="carousel-image" />
             </SwiperSlide>
             <SwiperSlide>
-              <img src="src/assets/images/img2.jpg" alt="Slide 2" className="carousel-image" />
+              <img src="/assets/images/img2.jpg" alt="Slide 2" className="carousel-image" />
             </SwiperSlide>
             <SwiperSlide>
-              <img src="src/assets/images/img3.jpg" alt="Slide 3" className="carousel-image" />
+              <img src="/assets/images/img3.jpg" alt="Slide 3" className="carousel-image" />
             </SwiperSlide>
           </Swiper>
         </div>

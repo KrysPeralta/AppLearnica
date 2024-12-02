@@ -63,42 +63,42 @@ const Test: React.FC = () => {
           <ContentCard 
             title="Test de Estilos 1" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
-            imageUrl="/src/assets/images/test/test_1.png" 
+            imageUrl="/assets/images/test/test_1.png" 
             onEdit={() => handleEdit("Test de Estilos 1")}
             onDelete={() => handleDelete("Test de Estilos 1")}
           />
           <ContentCard 
             title="Test de Estilos 2" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
-            imageUrl="/src/assets/images/test/test_2.png" 
+            imageUrl="/assets/images/test/test_2.png" 
             onEdit={() => handleEdit("Test de Estilos 2")}
             onDelete={() => handleDelete("Test de Estilos 2")}
           />
           <ContentCard 
             title="Test de Estilos 3" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
-            imageUrl="/src/assets/images/test/test_3.png" 
+            imageUrl="/assets/images/test/test_3.png" 
             onEdit={() => handleEdit("Test de Estilos 3")}
             onDelete={() => handleDelete("Test de Estilos 3")}
           />
           <ContentCard 
             title="Test de Estilos 4" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
-            imageUrl="/src/assets/images/test/test_4.png" 
+            imageUrl="/assets/images/test/test_4.png" 
             onEdit={() => handleEdit("Test de Estilos 4")}
             onDelete={() => handleDelete("Test de Estilos 4")}
           />
           <ContentCard 
             title="Test de Estilos 5" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
-            imageUrl="/src/assets/images/test/test_5.png" 
+            imageUrl="/assets/images/test/test_5.png" 
             onEdit={() => handleEdit("Test de Estilos 5")}
             onDelete={() => handleDelete("Test de Estilos 5")}
           />
           <ContentCard 
             title="Test de Estilos 6" 
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor ..."
-            imageUrl="/src/assets/images/test/test_6.png" 
+            imageUrl="/assets/images/test/test_6.png" 
             onEdit={() => handleEdit("Test de Estilos 6")}
             onDelete={() => handleDelete("Test de Estilos 6")}
           />
