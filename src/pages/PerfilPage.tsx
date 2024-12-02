@@ -3,12 +3,14 @@ import { IonPage, IonContent, IonHeader, IonButton } from '@ionic/react';
 import { useSession } from '../context/SessionContext'; // Importar el contexto
 import { apiService } from '../services/apiService'; // Servicio configurado
 import Navbar from '../components/navbar/Navbar'; // Importar correctamente el Navbar
+import PerfilModal from './PerfilModal'; // Importar el modal
 import './Test.css'; // Estilos específicos para PerfilPage
 
 const PerfilPage: React.FC = () => {
   const { userId } = useSession(); // Obtener el ID del usuario desde el contexto
   const [perfil, setPerfil] = useState<any>(null); // Estado para los datos del perfil
   const [error, setError] = useState<string | null>(null); // Estado para manejar errores
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para abrir/cerrar el modal
 
   useEffect(() => {
     if (userId) {
@@ -50,8 +52,11 @@ const PerfilPage: React.FC = () => {
   };
 
   const handleEdit = () => {
-    console.log('Editar información del perfil');
-    // Aquí puedes redirigir a una página de edición o abrir un modal
+    setIsModalOpen(true); // Abrir el modal
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // Cerrar el modal
   };
 
   return (
@@ -88,6 +93,9 @@ const PerfilPage: React.FC = () => {
             Editar Información
           </IonButton>
         </div>
+
+        {/* PerfilModal */}
+        <PerfilModal isOpen={isModalOpen} onClose={closeModal} />
       </IonContent>
     </IonPage>
   );
