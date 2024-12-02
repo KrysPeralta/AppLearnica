@@ -1,114 +1,119 @@
-import React from 'react';
-import { IonModal, IonInput, IonButton } from '@ionic/react';
-import './PerfilModal.css'; // Estilos exclusivos del modal
+import React, { useEffect, useState } from 'react';
+import { IonModal, IonInput, IonButton, IonSelect, IonSelectOption } from '@ionic/react';
+import { apiService } from '../services/apiService'; // Servicio API
+import './PerfilModal.css'; // Estilos del modal
 
 interface PerfilModalProps {
   isOpen: boolean;
   onClose: () => void;
+  perfilData: any; // Datos actuales del perfil
+  onSave: (updatedData: any) => void; // Función para actualizar el perfil en el componente principal
 }
 
-const PerfilModal: React.FC<PerfilModalProps> = ({ isOpen, onClose }) => {
+const PerfilModal: React.FC<PerfilModalProps> = ({ isOpen, onClose, perfilData, onSave }) => {
+  const [nombre, setNombre] = useState(perfilData?.nombre || '');
+  const [apellidoPaterno, setApellidoPaterno] = useState(perfilData?.apellido_paterno || '');
+  const [apellidoMaterno, setApellidoMaterno] = useState(perfilData?.apellido_materno || '');
+  const [telefono, setTelefono] = useState(perfilData?.telefono || '');
+  const [institucion, setInstitucion] = useState<number | null>(perfilData?.fk_institucion || null);
+  const [grado, setGrado] = useState<string | null>(perfilData?.grado_estudio || null);
+  const [instituciones, setInstituciones] = useState<any[]>([]);
+
+  // Cargar instituciones desde la API
+  useEffect(() => {
+    const fetchInstituciones = async () => {
+      try {
+        const response = await apiService.getData('instituciones/');
+        setInstituciones(response.data);
+      } catch (err) {
+        console.error('Error al cargar instituciones:', err);
+      }
+    };
+
+    fetchInstituciones();
+  }, []);
+
+  // Función para guardar los cambios
+  const handleSave = async () => {
+    const updatedDataUsuario = {
+      nombre,
+      apellido_paterno: apellidoPaterno,
+      apellido_materno: apellidoMaterno,
+      telefono,
+      fk_institucion: institucion,
+      grado_estudio: grado,
+    };
+
+    try {
+      console.log('Datos para datos_usuario:', updatedDataUsuario);
+
+      // Actualizar datos en datos_usuario/
+      await apiService.updateData('datos_usuario/', perfilData.pk_datos_usuario_id, updatedDataUsuario);
+
+      // Combinar los datos actualizados
+      onSave({
+        ...updatedDataUsuario,
+      });
+
+      // Cerrar el modal
+      onClose();
+    } catch (error) {
+      console.error('Error al guardar los datos:', error);
+    }
+  };
+
   return (
-    <IonModal
-      isOpen={isOpen}
-      onDidDismiss={onClose} // Se cierra el modal al tocar fuera de él
-      backdropDismiss={true} // Permite cerrar al tocar fuera
-      className="perfil-modal"
-    >
+    <IonModal isOpen={isOpen} onDidDismiss={onClose} backdropDismiss={true} className="perfil-modal">
       <div className="perfil-modal-content">
         <h2 className="perfil-modal-title">Editar Perfil</h2>
-        
-        {/* Campo: Nombre */}
+
         <div className="perfil-modal-inputs">
           <label>Nombre</label>
-          <IonInput
-            type="text"
-            className="perfil-input"
-            placeholder="Ingresa el nombre"
-          />
+          <IonInput value={nombre} onIonChange={(e) => setNombre(e.detail.value!)} />
         </div>
 
-        {/* Campo: Apellido Paterno */}
         <div className="perfil-modal-inputs">
           <label>Apellido Paterno</label>
-          <IonInput
-            type="text"
-            className="perfil-input"
-            placeholder="Ingresa el apellido paterno"
-          />
+          <IonInput value={apellidoPaterno} onIonChange={(e) => setApellidoPaterno(e.detail.value!)} />
         </div>
 
-        {/* Campo: Apellido Materno */}
         <div className="perfil-modal-inputs">
           <label>Apellido Materno</label>
-          <IonInput
-            type="text"
-            className="perfil-input"
-            placeholder="Ingresa el apellido materno"
-          />
+          <IonInput value={apellidoMaterno} onIonChange={(e) => setApellidoMaterno(e.detail.value!)} />
         </div>
 
-        {/* Campo: Teléfono */}
         <div className="perfil-modal-inputs">
           <label>Teléfono</label>
-          <IonInput
-            type="tel"
-            className="perfil-input"
-            placeholder="Ingresa el número de teléfono"
-          />
+          <IonInput value={telefono} onIonChange={(e) => setTelefono(e.detail.value!)} />
         </div>
 
-        {/* Campo: Correo */}
-        <div className="perfil-modal-inputs">
-          <label>Correo</label>
-          <IonInput
-            type="email"
-            className="perfil-input"
-            placeholder="Ingresa el correo electrónico"
-          />
-        </div>
-
-        {/* Campo: Rol */}
-        <div className="perfil-modal-inputs">
-          <label>Rol</label>
-          <IonInput
-            type="text"
-            className="perfil-input"
-            placeholder="Ingresa el rol"
-          />
-        </div>
-
-        {/* Campo: Institución */}
         <div className="perfil-modal-inputs">
           <label>Institución</label>
-          <IonInput
-            type="text"
-            className="perfil-input"
-            placeholder="Ingresa la institución"
-          />
+          <IonSelect value={institucion} onIonChange={(e) => setInstitucion(e.detail.value)}>
+            {instituciones.map((inst) => (
+              <IonSelectOption key={inst.pk_institucion_id} value={inst.pk_institucion_id}>
+                {inst.nombre}
+              </IonSelectOption>
+            ))}
+          </IonSelect>
         </div>
 
-        {/* Campo: Grado de Estudio */}
         <div className="perfil-modal-inputs">
           <label>Grado de Estudio</label>
-          <IonInput
-            type="text"
-            className="perfil-input"
-            placeholder="Ingresa el grado de estudio"
-          />
+          <IonSelect value={grado} onIonChange={(e) => setGrado(e.detail.value)}>
+            <IonSelectOption value="Licenciatura">Licenciatura</IonSelectOption>
+            <IonSelectOption value="Especialidad">Especialidad</IonSelectOption>
+            <IonSelectOption value="Maestría">Maestría</IonSelectOption>
+            <IonSelectOption value="Doctorado">Doctorado</IonSelectOption>
+          </IonSelect>
         </div>
 
-        {/* Botón para guardar */}
-        <div className="perfil-modal-buttons">
-          <IonButton expand="block" onClick={onClose} className="perfil-button-primary">
-            Guardar
-          </IonButton>
-        </div>
+        <IonButton expand="block" onClick={handleSave}>
+          Guardar
+        </IonButton>
       </div>
     </IonModal>
   );
 };
 
 export default PerfilModal;
-
-
