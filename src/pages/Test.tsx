@@ -7,6 +7,7 @@ import LoginModal from './LoginModal'; // Modal de inicio de sesión
 import RegisterModal from './RegisterModal'; // Modal de registro
 import TestCard from '../components/TestCard/TestCard'; // Componente TestCard
 import { apiService } from '../services/apiService'; // Servicio API
+import CreateTest from './CreateTest'; // Componente CreateTest
 
 interface Evaluacion {
   pk_evaluacion_id: number;
@@ -17,6 +18,7 @@ interface Evaluacion {
 const Test: React.FC = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [showCreateTest, setShowCreateTest] = useState(false); // Estado para mostrar/ocultar CreateTest
   const [evaluaciones, setEvaluaciones] = useState<Evaluacion[]>([]); // Estado inicial como arreglo vacío
 
   // Lista de imágenes disponibles en la carpeta "test"
@@ -53,15 +55,37 @@ const Test: React.FC = () => {
     fetchEvaluaciones();
   }, []);
 
+  // Manejo de eventos globales para abrir los modales
+  useEffect(() => {
+    const openLoginHandler = () => setIsLoginModalOpen(true);
+    const openRegisterHandler = () => setIsRegisterModalOpen(true);
+
+    window.addEventListener('open-login-modal', openLoginHandler);
+    window.addEventListener('open-register-modal', openRegisterHandler);
+
+    return () => {
+      window.removeEventListener('open-login-modal', openLoginHandler);
+      window.removeEventListener('open-register-modal', openRegisterHandler);
+    };
+  }, []);
+
+  if (showCreateTest) {
+    // Si el estado `showCreateTest` es true, muestra el componente CreateTest
+    return <CreateTest />;
+  }
+
   return (
     <IonPage>
       <IonContent fullscreen>
         {/* Barra de navegación */}
         <Navbar />
 
-        {/* Header con título */}
+        {/* Header con título y botón */}
         <div className="header-container">
           <h1 className="page-title">Evaluaciones Disponibles</h1>
+          <button className="create-button" onClick={() => setShowCreateTest(true)}>
+            Agregar Test
+          </button>
         </div>
 
         {/* Tarjetas de evaluaciones */}
@@ -86,13 +110,19 @@ const Test: React.FC = () => {
         <LoginModal 
           isOpen={isLoginModalOpen} 
           onClose={() => setIsLoginModalOpen(false)}
-          onSwitchToRegister={() => setIsRegisterModalOpen(true)} 
+          onSwitchToRegister={() => {
+            setIsLoginModalOpen(false);
+            setIsRegisterModalOpen(true);
+          }} 
         />
 
         <RegisterModal 
           isOpen={isRegisterModalOpen} 
           onClose={() => setIsRegisterModalOpen(false)} 
-          onSwitchToLogin={() => setIsLoginModalOpen(true)} 
+          onSwitchToLogin={() => {
+            setIsRegisterModalOpen(false);
+            setIsLoginModalOpen(true);
+          }} 
         />
       </IonContent>
     </IonPage>
@@ -100,4 +130,3 @@ const Test: React.FC = () => {
 };
 
 export default Test;
-
