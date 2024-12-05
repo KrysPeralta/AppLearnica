@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
         ) : (
           <>
             <a href="/Test">Test de Estilos</a>
-            <a href="/Materias">Materias</a>
+            <a href="/Instituciones">Instituciones</a>
             <a href="/Grupos">Grupos</a>
             <a href="/Biblioteca">Biblioteca</a>
             <a href="/Comentarios">Comentarios</a>

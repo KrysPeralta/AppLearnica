@@ -4,7 +4,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { SessionProvider } from './context/SessionContext'; // Importa el proveedor de sesión
 import Home from './pages/Home';
 import Test from './pages/Test';
-import Materias from './pages/Materias';
+import Instituciones from './pages/Instituciones';
 import Grupos from './pages/Grupos';
 import CreateTest from './pages/CreateTest';
 import TestView from './pages/TestView'; // Ruta para TestView
@@ -59,8 +59,8 @@ const App: React.FC = () => (
             <CreateTest />
           </Route>
 
-          <Route exact path="/materias">
-            <Materias />
+          <Route exact path="/Instituciones">
+            <Instituciones />
           </Route>
 
           <Route exact path="/grupos">

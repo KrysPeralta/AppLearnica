@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { IonCard, IonText, IonImg, IonButton, IonIcon, IonPopover, IonItem } from '@ionic/react';
 import { ellipsisVertical } from 'ionicons/icons';
-import './MateriasCard.scss';
+import './InstitucionesCard.scss';
 
-interface MateriasCardProps {
+interface InstitucionesCardProps {
   title: string;
   description: string;
   imageUrl: string;
@@ -11,7 +11,7 @@ interface MateriasCardProps {
   onDelete: () => void; // Función para eliminar
 }
 
-const MateriasCard: React.FC<MateriasCardProps> = ({ title, description, imageUrl, onEdit, onDelete }) => {
+const InstitucionesCard: React.FC<InstitucionesCardProps> = ({ title, description, imageUrl, onEdit, onDelete }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [popoverEvent, setPopoverEvent] = useState<React.MouseEvent | undefined>(undefined);
 
@@ -35,12 +35,12 @@ const MateriasCard: React.FC<MateriasCardProps> = ({ title, description, imageUr
   };
 
   return (
-    <IonCard className="materias-card">
-      <div className="materias-card-content">
-        <div className="materias-card-image-section">
+    <IonCard className="instituciones-card">
+      <div className="instituciones-card-content">
+        <div className="instituciones-card-image-section">
           <IonImg src={imageUrl} alt="Imagen del contenido" />
         </div>
-        <div className="materias-card-text-section">
+        <div className="instituciones-card-text-section">
           <IonText color="primary">
             <h2>{title}</h2>
           </IonText>
@@ -48,7 +48,7 @@ const MateriasCard: React.FC<MateriasCardProps> = ({ title, description, imageUr
             <p>{description}</p>
           </IonText>
         </div>
-        <IonButton fill="clear" onClick={(e) => openPopover(e)} className="materias-card-options-button">
+        <IonButton fill="clear" onClick={(e) => openPopover(e)} className="instituciones-card-options-button">
           <IonIcon icon={ellipsisVertical} />
         </IonButton>
         <IonPopover
@@ -65,5 +65,4 @@ const MateriasCard: React.FC<MateriasCardProps> = ({ title, description, imageUr
   );
 };
 
-export default MateriasCard;
-
+export default InstitucionesCard;
