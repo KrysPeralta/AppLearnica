@@ -1,119 +1,102 @@
-import { IonContent, IonPage } from '@ionic/react';  
-import './Test.css';
-
-import { useState } from 'react';
-import Navbar from '../components/navbar/Navbar'; // Navbar reutilizable
-import LoginModal from './LoginModal'; // Modal de inicio de sesión
-import RegisterModal from './RegisterModal'; // Modal de registro
-import GruposModal from './GruposModal'; // Modal de creación/edición de grupos
-import GruposCard from '../components/GruposCard/GruposCard'; // Componente GruposCard
+import React, { useState, useEffect } from 'react';
+import { IonPage, IonContent, IonButton } from '@ionic/react';
+import Navbar from '../components/navbar/Navbar';
+import GruposCard from '../components/GruposCard/GruposCard';
+import GruposModal from './GruposModal';
+import { apiService } from '../services/apiService';
 
 const Grupos: React.FC = () => {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [grupos, setGrupos] = useState<any[]>([]);
   const [isGruposModalOpen, setIsGruposModalOpen] = useState(false);
-  const [editingGrupo, setEditingGrupo] = useState<string | null>(null); // Estado para editar grupo
+  const [editingGrupo, setEditingGrupo] = useState<any | null>(null);
 
-  const openLoginModal = () => setIsLoginModalOpen(true);
-  const closeLoginModal = () => setIsLoginModalOpen(false);
+  // Lista de imágenes disponibles en la carpeta "grupos"
+  const images = [
+    '/src/assets/images/grupos/grupos_1.png',
+    '/src/assets/images/grupos/grupos_2.png',
+    '/src/assets/images/grupos/grupos_3.png',
+    '/src/assets/images/grupos/grupos_4.png',
+    '/src/assets/images/grupos/grupos_5.png',
+    '/src/assets/images/grupos/grupos_6.png',
+  ];
 
-  const openRegisterModal = () => {
-    setIsRegisterModalOpen(true);
-    setIsLoginModalOpen(false); // Cierra el modal de login si está abierto
+  // Función para obtener una imagen aleatoria
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
   };
 
-  const closeRegisterModal = () => setIsRegisterModalOpen(false);
+  const fetchGrupos = async () => {
+    try {
+      const response = await apiService.getData('clases/'); // Asegúrate de que la ruta sea '/clases/'
+      setGrupos(response.data);
+    } catch (error) {
+      console.error('Error al obtener los grupos:', error);
+    }
+  };
 
-  const openGruposModal = (grupoTitle: string | null = null) => {
-    setEditingGrupo(grupoTitle); // Si es null, significa que se creará un grupo nuevo
+  const handleSaveGrupo = async (grupo: any) => {
+    try {
+      if (editingGrupo) {
+        await apiService.updateData('clases/', editingGrupo.pk_clase_id, grupo); // Asegúrate de usar la ruta correcta
+      } else {
+        await apiService.createData('clases/', grupo); // Asegúrate de usar la ruta correcta
+      }
+      fetchGrupos();
+      closeGruposModal();
+    } catch (error) {
+      console.error('Error al guardar el grupo:', error);
+    }
+  };
+
+  const handleDeleteGrupo = async (id: number) => {
+    try {
+      await apiService.deleteData('clases/', id); // Asegúrate de usar la ruta correcta
+      fetchGrupos();
+    } catch (error) {
+      console.error('Error al eliminar el grupo:', error);
+    }
+  };
+
+  const openGruposModal = (grupo: any | null = null) => {
+    setEditingGrupo(grupo);
     setIsGruposModalOpen(true);
   };
 
   const closeGruposModal = () => {
-    setEditingGrupo(null); // Reiniciar estado
+    setEditingGrupo(null);
     setIsGruposModalOpen(false);
   };
 
-  // Función para eliminar un grupo
-  const handleDelete = (title: string) => {
-    console.log(`Eliminar ${title}`);
-    // Aquí puedes agregar la lógica para confirmar y eliminar el grupo
-  };
+  useEffect(() => {
+    fetchGrupos();
+  }, []);
 
   return (
     <IonPage>
       <IonContent fullscreen>
-        {/* Barra de navegación */}
         <Navbar />
-
-        {/* Título y botón Crear Grupo */}
         <div className="header-container">
           <h1 className="page-title">Grupos</h1>
-          <button className="create-button" onClick={() => openGruposModal(null)}>
-            Crear Grupo
-          </button>
+          <button className="create-button" onClick={() => openGruposModal(null)}>Crear Grupo</button>
         </div>
-
-        {/* Tarjetas de grupos */}
         <div className="grupos-card-wrapper">
-          <GruposCard 
-            title="Grupo A" 
-            description="Grupo enfocado en el estudio avanzado de matemáticas."
-            imageUrl="/src/assets/images/grupos/grupos_1.png"
-            onEdit={() => openGruposModal("Grupo A")}
-            onDelete={() => handleDelete("Grupo A")}
-          />
-          <GruposCard 
-            title="Grupo B" 
-            description="Estudio de habilidades verbales."
-            imageUrl="/src/assets/images/grupos/grupos_2.png"
-            onEdit={() => openGruposModal("Grupo B")}
-            onDelete={() => handleDelete("Grupo B")}
-          />
-          <GruposCard 
-            title="Grupo C" 
-            description="Fundamentos y configuración de redes de computadoras."
-            imageUrl="/src/assets/images/grupos/grupos_3.png"
-            onEdit={() => openGruposModal("Grupo C")}
-            onDelete={() => handleDelete("Grupo C")}
-          />
-          <GruposCard 
-            title="Grupo D" 
-            description="Introducción y prácticas en programación básica y avanzada."
-            imageUrl="/src/assets/images/grupos/grupos_4.png"
-            onEdit={() => openGruposModal("Grupo D")}
-            onDelete={() => handleDelete("Grupo D")}
-          />
-          <GruposCard 
-            title="Grupo E" 
-            description="Grupo dedicado a la exploración de conceptos en química."
-            imageUrl="/src/assets/images/grupos/grupos_5.png"
-            onEdit={() => openGruposModal("Grupo E")}
-            onDelete={() => handleDelete("Grupo E")}
-          />
-          <GruposCard 
-            title="Grupo F" 
-            description="Estudio del diseño arquitectónico y su aplicación práctica."
-            imageUrl="/src/assets/images/grupos/grupos_6.png"
-            onEdit={() => openGruposModal("Grupo F")}
-            onDelete={() => handleDelete("Grupo F")}
-          />
+          {grupos.map((grupo) => (
+            <GruposCard
+              key={grupo.pk_clase_id}
+              title={grupo.nombre}
+              description={grupo.descripcion}
+              imageUrl={getRandomImage()} // Asignamos una imagen aleatoria
+              onEdit={() => openGruposModal(grupo)}
+              onDelete={() => handleDeleteGrupo(grupo.pk_clase_id)}
+            />
+          ))}
         </div>
-
-        {/* Modales */}
-        <LoginModal 
-          isOpen={isLoginModalOpen} 
-          onClose={closeLoginModal}
-          onSwitchToRegister={openRegisterModal} 
-        />
-        <RegisterModal 
-          isOpen={isRegisterModalOpen} 
-          onClose={closeRegisterModal} 
-          onSwitchToLogin={openLoginModal} 
-        />
-        <GruposModal 
-          isOpen={isGruposModalOpen} 
-          onClose={closeGruposModal} 
+        <GruposModal
+          isOpen={isGruposModalOpen}
+          onClose={closeGruposModal}
+          onSave={handleSaveGrupo}
+          editingGrupo={editingGrupo}
         />
       </IonContent>
     </IonPage>
@@ -121,5 +104,3 @@ const Grupos: React.FC = () => {
 };
 
 export default Grupos;
-
-
