@@ -2,6 +2,7 @@ import { IonContent, IonPage } from '@ionic/react';
 import './Test.css';
 
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Navbar from '../components/navbar/Navbar'; // Barra de navegación
 import LoginModal from './LoginModal'; // Modal de inicio de sesión
 import RegisterModal from './RegisterModal'; // Modal de registro
@@ -20,6 +21,7 @@ const Test: React.FC = () => {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [showCreateTest, setShowCreateTest] = useState(false); // Estado para mostrar/ocultar CreateTest
   const [evaluaciones, setEvaluaciones] = useState<Evaluacion[]>([]); // Estado inicial como arreglo vacío
+  const history = useHistory(); // Hook para navegación
 
   // Lista de imágenes disponibles en la carpeta "test"
   const images = [
@@ -69,6 +71,10 @@ const Test: React.FC = () => {
     };
   }, []);
 
+  const handleCardClick = (testId: number) => {
+    history.push(`/TestView/${testId}`); // Navega a la página TestView con el ID del test
+  };
+
   if (showCreateTest) {
     // Si el estado `showCreateTest` es true, muestra el componente CreateTest
     return <CreateTest />;
@@ -99,6 +105,7 @@ const Test: React.FC = () => {
                 imageUrl={getRandomImage()} // Asigna una imagen aleatoria
                 onEdit={() => console.log(`Editar ${evaluacion.nombre}`)} // Placeholder
                 onDelete={() => console.log(`Eliminar ${evaluacion.nombre}`)} // Placeholder
+                onClick={() => handleCardClick(evaluacion.pk_evaluacion_id)} // Navega al hacer clic
               />
             ))
           ) : (

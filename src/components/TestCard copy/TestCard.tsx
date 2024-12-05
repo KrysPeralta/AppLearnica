@@ -9,10 +9,9 @@ interface TestCardProps {
   imageUrl: string;
   onEdit: () => void; // Función para editar
   onDelete: () => void; // Función para eliminar
-  onClick?: () => void; // Nueva propiedad para manejar el clic
 }
 
-const TestCard: React.FC<TestCardProps> = ({ title, description, imageUrl, onEdit, onDelete, onClick }) => {
+const TestCard: React.FC<TestCardProps> = ({ title, description, imageUrl, onEdit, onDelete }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [popoverEvent, setPopoverEvent] = useState<React.MouseEvent | undefined>(undefined);
 
@@ -36,7 +35,7 @@ const TestCard: React.FC<TestCardProps> = ({ title, description, imageUrl, onEdi
   };
 
   return (
-    <IonCard className="test-card" onClick={onClick}> {/* Utiliza la propiedad onClick */}
+    <IonCard className="test-card">
       <div className="test-card-content">
         <div className="test-card-image-section">
           <IonImg src={imageUrl} alt="Imagen del contenido" />
@@ -67,3 +66,4 @@ const TestCard: React.FC<TestCardProps> = ({ title, description, imageUrl, onEdi
 };
 
 export default TestCard;
+

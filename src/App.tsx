@@ -7,6 +7,7 @@ import Test from './pages/Test';
 import Materias from './pages/Materias';
 import Grupos from './pages/Grupos';
 import CreateTest from './pages/CreateTest';
+import TestView from './pages/TestView'; // Ruta para TestView
 import Comentarios from './pages/Comentarios';
 import Biblioteca from './pages/Biblioteca';
 import PerfilPage from './pages/PerfilPage';
@@ -46,6 +47,14 @@ const App: React.FC = () => (
             <Test />
           </Route>
 
+          {/* Corregimos la ruta para pasar el parámetro testId */}
+          <Route
+  exact
+  path="/TestView/:testId"
+  render={(props) => <TestView testId={parseInt(props.match.params.testId, 10)} />}
+/>
+
+
           <Route exact path="/create-test">
             <CreateTest />
           </Route>
@@ -70,6 +79,7 @@ const App: React.FC = () => (
             <PerfilPage />
           </Route>
 
+          {/* Ruta raíz redirige a Home */}
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
