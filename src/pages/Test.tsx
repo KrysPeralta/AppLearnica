@@ -75,6 +75,16 @@ const Test: React.FC = () => {
     history.push(`/TestView/${testId}`); // Navega a la página TestView con el ID del test
   };
 
+  const handleEdit = (event: React.MouseEvent, testName: string) => {
+    event.stopPropagation(); // Evita que el clic propague al contenedor padre
+    console.log(`Editar ${testName}`);
+  };
+
+  const handleDelete = (event: React.MouseEvent, testName: string) => {
+    event.stopPropagation(); // Evita que el clic propague al contenedor padre
+    console.log(`Eliminar ${testName}`);
+  };
+
   if (showCreateTest) {
     // Si el estado `showCreateTest` es true, muestra el componente CreateTest
     return <CreateTest />;
@@ -102,10 +112,10 @@ const Test: React.FC = () => {
                 key={evaluacion.pk_evaluacion_id}
                 title={evaluacion.nombre}
                 description={evaluacion.descripcion}
-                imageUrl={getRandomImage()} // Asigna una imagen aleatoria
-                onEdit={() => console.log(`Editar ${evaluacion.nombre}`)} // Placeholder
-                onDelete={() => console.log(`Eliminar ${evaluacion.nombre}`)} // Placeholder
-                onClick={() => handleCardClick(evaluacion.pk_evaluacion_id)} // Navega al hacer clic
+                imageUrl={getRandomImage()}
+                onEdit={(event) => handleEdit(event, evaluacion.nombre)}
+                onDelete={(event) => handleDelete(event, evaluacion.nombre)}
+                onClick={() => handleCardClick(evaluacion.pk_evaluacion_id)}
               />
             ))
           ) : (

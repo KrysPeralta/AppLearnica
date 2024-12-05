@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import { IonCard, IonText, IonImg, IonButton, IonIcon, IonPopover, IonItem } from '@ionic/react';
 import { ellipsisVertical } from 'ionicons/icons';
-import './TestCard.scss';
+import './GruposCard.scss';
 
-interface TestCardProps {
+interface GruposCardProps {
   title: string;
   description: string;
   imageUrl: string;
-  onEdit: (event: React.MouseEvent) => void; // Función para editar
-  onDelete: (event: React.MouseEvent) => void; // Función para eliminar
-  onClick?: () => void; // Propiedad opcional para manejar clics en la tarjeta
+  onEdit: () => void; // Función para editar
+  onDelete: () => void; // Función para eliminar
 }
 
-const TestCard: React.FC<TestCardProps> = ({ title, description, imageUrl, onEdit, onDelete, onClick }) => {
+const GruposCard: React.FC<GruposCardProps> = ({ title, description, imageUrl, onEdit, onDelete }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [popoverEvent, setPopoverEvent] = useState<React.MouseEvent | undefined>(undefined);
 
   const openPopover = (event: React.MouseEvent) => {
-    event.stopPropagation(); // Evita que la acción del popover propague el clic al contenedor padre
     setPopoverEvent(event);
     setShowPopover(true);
   };
@@ -26,13 +24,23 @@ const TestCard: React.FC<TestCardProps> = ({ title, description, imageUrl, onEdi
     setShowPopover(false);
   };
 
+  const handleEdit = () => {
+    onEdit();
+    closePopover(); // Cierra el popover al seleccionar esta opción
+  };
+
+  const handleDelete = () => {
+    onDelete();
+    closePopover(); // Cierra el popover al seleccionar esta opción
+  };
+
   return (
-    <IonCard className="test-card" onClick={onClick}>
-      <div className="test-card-content">
-        <div className="test-card-image-section">
+    <IonCard className="grupos-card">
+      <div className="grupos-card-content">
+        <div className="grupos-card-image-section">
           <IonImg src={imageUrl} alt="Imagen del contenido" />
         </div>
-        <div className="test-card-text-section">
+        <div className="grupos-card-text-section">
           <IonText color="primary">
             <h2>{title}</h2>
           </IonText>
@@ -40,11 +48,7 @@ const TestCard: React.FC<TestCardProps> = ({ title, description, imageUrl, onEdi
             <p>{description}</p>
           </IonText>
         </div>
-        <IonButton
-          fill="clear"
-          onClick={(e) => openPopover(e)} // Evitar propagación aquí también
-          className="test-card-options-button"
-        >
+        <IonButton fill="clear" onClick={(e) => openPopover(e)} className="grupos-card-options-button">
           <IonIcon icon={ellipsisVertical} />
         </IonButton>
         <IonPopover
@@ -53,13 +57,12 @@ const TestCard: React.FC<TestCardProps> = ({ title, description, imageUrl, onEdi
           onDidDismiss={closePopover}
           alignment="center"
         >
-          <IonItem button onClick={(e) => onEdit(e)}>Editar</IonItem>
-          <IonItem button onClick={(e) => onDelete(e)}>Eliminar</IonItem>
+          <IonItem button onClick={handleEdit}>Editar</IonItem>
+          <IonItem button onClick={handleDelete}>Eliminar</IonItem>
         </IonPopover>
       </div>
     </IonCard>
   );
 };
 
-export default TestCard;
-
+export default GruposCard;

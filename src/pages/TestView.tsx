@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { IonPage, IonContent, IonButton, IonList, IonItem, IonLabel, IonRadioGroup, IonRadio, IonToast } from '@ionic/react';
 import { apiService } from '../services/apiService'; // Usa tu servicio de API para obtener datos
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import './TestView.scss';
 
 interface TestViewProps {}
 
 interface Pregunta {
   pk_pregunta_id: number;
   texto: string;
-  opciones: { pk_respuesta_id: number; texto: string; es_correcta?: boolean }[];
+  opciones: { pk_respuesta_id: number; texto: string }[];
 }
 
 const TestView: React.FC<TestViewProps> = () => {
   const { testId } = useParams<{ testId: string }>(); // Obtener el testId desde los parámetros de la ruta
+  const history = useHistory(); // Hook para redirigir a otra página
   const [testInfo, setTestInfo] = useState<{ nombre: string; descripcion: string } | null>(null);
   const [preguntas, setPreguntas] = useState<Pregunta[]>([]);
-  const [respuestas, setRespuestas] = useState<{ [key: number]: number }>({}); // ID de respuesta seleccionada por pregunta
   const [showToast, setShowToast] = useState(false);
 
   // Obtener información del test y preguntas
@@ -49,32 +50,12 @@ const TestView: React.FC<TestViewProps> = () => {
     fetchTestInfo();
   }, [testId]);
 
-  // Guardar la respuesta seleccionada por el usuario
-  const handleAnswerChange = (preguntaId: number, respuestaId: number) => {
-    setRespuestas({ ...respuestas, [preguntaId]: respuestaId });
-  };
-
   // Manejar el envío del test
-  const handleSubmitTest = async () => {
-    try {
-      // Crear un arreglo con las respuestas seleccionadas
-      const respuestasSeleccionadas = Object.keys(respuestas).map((preguntaId) => ({
-        fk_pregunta: parseInt(preguntaId),
-        fk_respuesta: respuestas[parseInt(preguntaId)],
-      }));
-
-      console.log('Respuestas seleccionadas:', respuestasSeleccionadas);
-
-      // Enviar las respuestas a la API
-      await apiService.createData('resultados-tests/', {
-        fk_test: parseInt(testId, 10),
-        respuestas: respuestasSeleccionadas,
-      });
-
-      setShowToast(true); // Mostrar mensaje de éxito
-    } catch (error) {
-      console.error('Error al enviar el test:', error);
-    }
+  const handleSubmitTest = () => {
+    setShowToast(true); // Mostrar mensaje de éxito
+    setTimeout(() => {
+      history.push('/test'); // Redirigir a la vista de Test después de un breve momento
+    }, 2000); // Esperar 2 segundos antes de redirigir
   };
 
   return (
@@ -95,9 +76,7 @@ const TestView: React.FC<TestViewProps> = () => {
               <IonItem>
                 <IonLabel>{pregunta.texto}</IonLabel>
               </IonItem>
-              <IonRadioGroup
-                onIonChange={(e) => handleAnswerChange(pregunta.pk_pregunta_id, parseInt(e.detail.value))}
-              >
+              <IonRadioGroup>
                 {pregunta.opciones.map((opcion) => (
                   <IonItem key={opcion.pk_respuesta_id}>
                     <IonLabel>{opcion.texto}</IonLabel>
@@ -118,7 +97,7 @@ const TestView: React.FC<TestViewProps> = () => {
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
-          message="Test enviado exitosamente"
+          message="Respuestas enviadas exitosamente"
           duration={2000}
         />
       </IonContent>
@@ -127,3 +106,4 @@ const TestView: React.FC<TestViewProps> = () => {
 };
 
 export default TestView;
+

@@ -2,24 +2,27 @@ import { IonContent, IonPage } from '@ionic/react';
 import './Test.css';
 
 import { useState } from 'react';
-import LoginModal from './LoginModal';
-import GruposModal from './GruposModal'; // Importa el modal de Grupos
-import ContentCard from '../components/ContentCard/ContentCard'; // Importa el componente ContentCard
+import Navbar from '../components/navbar/Navbar'; // Navbar reutilizable
+import LoginModal from './LoginModal'; // Modal de inicio de sesión
+import RegisterModal from './RegisterModal'; // Modal de registro
+import GruposModal from './GruposModal'; // Modal de creación/edición de grupos
+import GruposCard from '../components/GruposCard/GruposCard'; // Componente GruposCard
 
 const Grupos: React.FC = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isGruposModalOpen, setIsGruposModalOpen] = useState(false);
-  const [editingGrupo, setEditingGrupo] = useState<string | null>(null); // Para editar grupo
+  const [editingGrupo, setEditingGrupo] = useState<string | null>(null); // Estado para editar grupo
+
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
 
   const openRegisterModal = () => {
-    setIsLoginModalOpen(false);
-    setIsGruposModalOpen(true);
+    setIsRegisterModalOpen(true);
+    setIsLoginModalOpen(false); // Cierra el modal de login si está abierto
   };
 
-  const openLoginModal = () => {
-    setIsGruposModalOpen(false);
-    setIsLoginModalOpen(true);
-  };
+  const closeRegisterModal = () => setIsRegisterModalOpen(false);
 
   const openGruposModal = (grupoTitle: string | null = null) => {
     setEditingGrupo(grupoTitle); // Si es null, significa que se creará un grupo nuevo
@@ -40,17 +43,8 @@ const Grupos: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
-        <header className="navbar">
-          <a href="/" className="navbar-logo">🏠</a>
-          <nav className="navbar-links">
-            <a href="/Test">Test de Estilos</a>
-            <a href="/Materias">Materias</a>
-            <a href="/Grupos">Grupos</a>
-            <a href="/Biblioteca">Biblioteca</a>
-            <a href="/Comentarios">Comentarios</a>  
-          </nav>
-          <button className="login-button" onClick={() => setIsLoginModalOpen(true)}>Iniciar sesión</button>
-        </header>
+        {/* Barra de navegación */}
+        <Navbar />
 
         {/* Título y botón Crear Grupo */}
         <div className="header-container">
@@ -60,43 +54,44 @@ const Grupos: React.FC = () => {
           </button>
         </div>
 
-        <div className="content-card-wrapper">
-          <ContentCard 
+        {/* Tarjetas de grupos */}
+        <div className="grupos-card-wrapper">
+          <GruposCard 
             title="Grupo A" 
             description="Grupo enfocado en el estudio avanzado de matemáticas."
             imageUrl="/src/assets/images/grupos/grupos_1.png"
             onEdit={() => openGruposModal("Grupo A")}
             onDelete={() => handleDelete("Grupo A")}
           />
-          <ContentCard 
+          <GruposCard 
             title="Grupo B" 
             description="Estudio de habilidades verbales."
             imageUrl="/src/assets/images/grupos/grupos_2.png"
             onEdit={() => openGruposModal("Grupo B")}
             onDelete={() => handleDelete("Grupo B")}
           />
-          <ContentCard 
+          <GruposCard 
             title="Grupo C" 
             description="Fundamentos y configuración de redes de computadoras."
             imageUrl="/src/assets/images/grupos/grupos_3.png"
             onEdit={() => openGruposModal("Grupo C")}
             onDelete={() => handleDelete("Grupo C")}
           />
-          <ContentCard 
+          <GruposCard 
             title="Grupo D" 
             description="Introducción y prácticas en programación básica y avanzada."
             imageUrl="/src/assets/images/grupos/grupos_4.png"
             onEdit={() => openGruposModal("Grupo D")}
             onDelete={() => handleDelete("Grupo D")}
           />
-          <ContentCard 
+          <GruposCard 
             title="Grupo E" 
             description="Grupo dedicado a la exploración de conceptos en química."
             imageUrl="/src/assets/images/grupos/grupos_5.png"
             onEdit={() => openGruposModal("Grupo E")}
             onDelete={() => handleDelete("Grupo E")}
           />
-          <ContentCard 
+          <GruposCard 
             title="Grupo F" 
             description="Estudio del diseño arquitectónico y su aplicación práctica."
             imageUrl="/src/assets/images/grupos/grupos_6.png"
@@ -108,8 +103,13 @@ const Grupos: React.FC = () => {
         {/* Modales */}
         <LoginModal 
           isOpen={isLoginModalOpen} 
-          onClose={() => setIsLoginModalOpen(false)}
+          onClose={closeLoginModal}
           onSwitchToRegister={openRegisterModal} 
+        />
+        <RegisterModal 
+          isOpen={isRegisterModalOpen} 
+          onClose={closeRegisterModal} 
+          onSwitchToLogin={openLoginModal} 
         />
         <GruposModal 
           isOpen={isGruposModalOpen} 
@@ -121,3 +121,5 @@ const Grupos: React.FC = () => {
 };
 
 export default Grupos;
+
+
