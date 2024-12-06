@@ -4,14 +4,13 @@ import { ellipsisVertical } from 'ionicons/icons';
 import './ComentarioCard.css';
 
 interface ComentarioCardProps {
-  usuario: string;
-  comentario: string;
-  avatarUrl: string;
+  pregunta: string;
+  respuesta: string;
   onEdit: () => void; // Función para editar
   onDelete: () => void; // Función para eliminar
 }
 
-const ComentarioCard: React.FC<ComentarioCardProps> = ({ usuario, comentario, avatarUrl, onEdit, onDelete }) => {
+const ComentarioCard: React.FC<ComentarioCardProps> = ({ pregunta, respuesta, onEdit, onDelete }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [popoverEvent, setPopoverEvent] = useState<React.MouseEvent | undefined>(undefined);
 
@@ -38,14 +37,15 @@ const ComentarioCard: React.FC<ComentarioCardProps> = ({ usuario, comentario, av
     <IonCard className="comentario-card">
       <div className="card-content">
         <div className="avatar-section">
-          <img src={avatarUrl} alt={`${usuario} avatar`} className="avatar-image" />
+          {/* Imagen de avatar, puedes cambiar esta línea según tu diseño */}
+          <img src="/assets/images/user-avatar.png" alt="Avatar" className="avatar-image" />
         </div>
         <div className="text-section">
           <IonText color="primary">
-            <h2>{usuario}</h2>
+            <h2 className="pregunta">{pregunta}</h2>
           </IonText>
           <IonText color="medium">
-            <p>{comentario}</p>
+            <p className="respuesta">{respuesta}</p>
           </IonText>
         </div>
         <IonButton fill="clear" onClick={openPopover} className="options-button">
