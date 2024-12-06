@@ -23,6 +23,7 @@
 }
 
 
+/* Espaciado en la parte del texto */
 .card-content {
   display: flex;
   align-items: center;
@@ -44,6 +45,7 @@
 
 .text-section {
   flex: 1;
+  margin-left: 15px; /* Separación entre la imagen y el texto */
 }
 
 .text-section h2 {

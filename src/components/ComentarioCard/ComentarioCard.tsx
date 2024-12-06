@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { IonCard, IonText, IonIcon, IonButton, IonPopover, IonItem } from '@ionic/react';
+import { IonCard, IonText, IonImg, IonIcon, IonButton, IonPopover, IonItem } from '@ionic/react';
 import { ellipsisVertical } from 'ionicons/icons';
 import './ComentarioCard.css';
 
 interface ComentarioCardProps {
   pregunta: string;
   respuesta: string;
+  imageUrl: string;
   onEdit: () => void; // Función para editar
   onDelete: () => void; // Función para eliminar
 }
 
-const ComentarioCard: React.FC<ComentarioCardProps> = ({ pregunta, respuesta, onEdit, onDelete }) => {
+const ComentarioCard: React.FC<ComentarioCardProps> = ({ pregunta, respuesta, imageUrl, onEdit, onDelete }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [popoverEvent, setPopoverEvent] = useState<React.MouseEvent | undefined>(undefined);
 
@@ -37,8 +38,8 @@ const ComentarioCard: React.FC<ComentarioCardProps> = ({ pregunta, respuesta, on
     <IonCard className="comentario-card">
       <div className="card-content">
         <div className="avatar-section">
-          {/* Imagen de avatar, puedes cambiar esta línea según tu diseño */}
-          <img src="/assets/images/user-avatar.png" alt="Avatar" className="avatar-image" />
+          {/* Usar la imagen recibida desde el prop */}
+          <IonImg src={imageUrl} alt="Imagen del contenido" />
         </div>
         <div className="text-section">
           <IonText color="primary">
@@ -66,3 +67,4 @@ const ComentarioCard: React.FC<ComentarioCardProps> = ({ pregunta, respuesta, on
 };
 
 export default ComentarioCard;
+

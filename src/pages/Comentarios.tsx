@@ -11,6 +11,35 @@ const ComentariosPage: React.FC = () => {
   const [currentComment, setCurrentComment] = useState<any | null>(null); // Estado para el comentario que se edita
   const [comentarios, setComentarios] = useState<any[]>([]); // Estado para los comentarios
 
+  // Lista de imágenes disponibles en la carpeta "users"
+  const images = [
+    '/src/assets/images/users/users1.png',
+    '/src/assets/images/users/users2.png',
+    '/src/assets/images/users/users3.png',
+    '/src/assets/images/users/users4.png',
+    '/src/assets/images/users/users5.png',
+    '/src/assets/images/users/users6.png',
+    '/src/assets/images/users/users7.png',
+    '/src/assets/images/users/users8.png',
+    '/src/assets/images/users/users9.png',
+    '/src/assets/images/users/users10.png',
+    '/src/assets/images/users/users11.png',
+    '/src/assets/images/users/users12.png',
+    '/src/assets/images/users/users13.png',
+    '/src/assets/images/users/users14.png',
+    '/src/assets/images/users/users15.png',
+    '/src/assets/images/users/users16.png',
+    '/src/assets/images/users/users17.png',
+    '/src/assets/images/users/users18.png',
+    '/src/assets/images/users/users19.png',
+    '/src/assets/images/users/users20.png',
+  ];
+
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
+  };
+
   // Función para obtener los comentarios desde la API
   const fetchComentarios = async () => {
     try {
@@ -65,7 +94,7 @@ const ComentariosPage: React.FC = () => {
         {/* Título y botón Agregar Comentario */}
         <div className="header-container">
           <h1 className="page-title">Preguntas y Respuestas</h1>
-          <button className="create-button" onClick={openModalForCreate}>Agregar Comentario</button>
+          <IonButton onClick={openModalForCreate}>Agregar Comentario</IonButton>
         </div>
 
         {/* Contenedor de comentarios */}
@@ -75,6 +104,7 @@ const ComentariosPage: React.FC = () => {
               key={comentario.pk_pozo_pregunta_id}
               pregunta={comentario.pregunta}
               respuesta={comentario.respuesta}
+              imageUrl={getRandomImage()} // Asignamos una imagen aleatoria
               onEdit={() => openModalForEdit(comentario)} // Editar el comentario
               onDelete={() => console.log(`Eliminar comentario con ID ${comentario.pk_pozo_pregunta_id}`)} // Lógica de eliminación
             />
@@ -94,3 +124,4 @@ const ComentariosPage: React.FC = () => {
 };
 
 export default ComentariosPage;
+
