@@ -19,12 +19,12 @@ const Instituciones: React.FC = () => {
 
   // Lista de imágenes disponibles en la carpeta "instituciones"
   const images = [
-    '/src/assets/images/instituciones/institucion_1.png',
-    '/src/assets/images/instituciones/institucion_2.png',
-    '/src/assets/images/instituciones/institucion_3.png',
-    '/src/assets/images/instituciones/institucion_4.png',
-    '/src/assets/images/instituciones/institucion_5.png',
-    '/src/assets/images/instituciones/institucion_6.png',
+    '/assets/images/instituciones/institucion_1.png',
+    '/assets/images/instituciones/institucion_2.png',
+    '/assets/images/instituciones/institucion_3.png',
+    '/assets/images/instituciones/institucion_4.png',
+    '/assets/images/instituciones/institucion_5.png',
+    '/assets/images/instituciones/institucion_6.png',
   ];
 
   // Función para obtener una imagen aleatoria

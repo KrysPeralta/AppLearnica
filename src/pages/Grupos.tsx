@@ -12,12 +12,12 @@ const Grupos: React.FC = () => {
 
   // Lista de imágenes disponibles en la carpeta "grupos"
   const images = [
-    '/src/assets/images/grupos/grupos_1.png',
-    '/src/assets/images/grupos/grupos_2.png',
-    '/src/assets/images/grupos/grupos_3.png',
-    '/src/assets/images/grupos/grupos_4.png',
-    '/src/assets/images/grupos/grupos_5.png',
-    '/src/assets/images/grupos/grupos_6.png',
+    '/assets/images/grupos/grupos_1.png',
+    '/assets/images/grupos/grupos_2.png',
+    '/assets/images/grupos/grupos_3.png',
+    '/assets/images/grupos/grupos_4.png',
+    '/assets/images/grupos/grupos_5.png',
+    '/assets/images/grupos/grupos_6.png',
   ];
 
   // Función para obtener una imagen aleatoria

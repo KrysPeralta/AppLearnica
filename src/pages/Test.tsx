@@ -25,12 +25,12 @@ const Test: React.FC = () => {
 
   // Lista de imágenes disponibles en la carpeta "test"
   const images = [
-    '/src/assets/images/test/test_1.png',
-    '/src/assets/images/test/test_2.png',
-    '/src/assets/images/test/test_3.png',
-    '/src/assets/images/test/test_4.png',
-    '/src/assets/images/test/test_5.png',
-    '/src/assets/images/test/test_6.png',
+    '/assets/images/test/test_1.png',
+    '/assets/images/test/test_2.png',
+    '/assets/images/test/test_3.png',
+    '/assets/images/test/test_4.png',
+    '/assets/images/test/test_5.png',
+    '/assets/images/test/test_6.png',
   ];
 
   // Función para obtener una imagen aleatoria
