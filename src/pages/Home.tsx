@@ -54,12 +54,6 @@ const Home: React.FC = () => {
                 <div className="carousel-overlay">
                   <h2>Descubre tu Estilo de Aprendizaje</h2>
                   <p>Realiza tests interactivos para conocer cómo aprendes mejor.</p>
-                  <button
-                    className="carousel-button"
-                    onClick={() => setIsRegisterModalOpen(true)}
-                  >
-                    Empieza ahora
-                  </button>
                 </div>
               </div>
             </SwiperSlide>
@@ -73,12 +67,6 @@ const Home: React.FC = () => {
                 <div className="carousel-overlay">
                   <h2>Recomendaciones Personalizadas</h2>
                   <p>Obtén estrategias y actividades diseñadas para tu estilo.</p>
-                  <button
-                    className="carousel-button"
-                    onClick={() => setIsRegisterModalOpen(true)}
-                  >
-                    Descubre Más
-                  </button>
                 </div>
               </div>
             </SwiperSlide>
@@ -94,9 +82,9 @@ const Home: React.FC = () => {
                   <p>Evalúa tus conocimientos y ayuda a tus profesores a entenderte mejor.</p>
                   <button
                     className="carousel-button"
-                    onClick={() => setIsRegisterModalOpen(true)}
+                    onClick={() => setIsLoginModalOpen(true)}
                   >
-                    Ver Más
+                    Descubre Más
                   </button>
                 </div>
               </div>

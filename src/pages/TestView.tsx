@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { IonPage, IonContent, IonButton, IonList, IonItem, IonLabel, IonRadioGroup, IonRadio, IonToast } from '@ionic/react';
-import { apiService } from '../services/apiService'; // Usa tu servicio de API para obtener datos
+import {
+  IonPage,
+  IonContent,
+  IonButton,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonRadioGroup,
+  IonRadio,
+  IonToast,
+} from '@ionic/react';
+import { apiService } from '../services/apiService';
 import { useParams, useHistory } from 'react-router-dom';
-import './TestView.scss';
+import './TestView.css';
 
 const TestView: React.FC = () => {
-  const { testId } = useParams<{ testId: string }>(); // Obtener el testId desde los parámetros de la ruta
-  const history = useHistory(); // Hook para redirigir a otra página
+  const { testId } = useParams<{ testId: string }>();
+  const history = useHistory();
   const [testInfo, setTestInfo] = useState<{ nombre: string; descripcion: string } | null>(null);
   const [preguntas, setPreguntas] = useState<any[]>([]);
   const [showToast, setShowToast] = useState(false);
 
-  // Obtener información del test y preguntas
   useEffect(() => {
     const fetchTestInfo = async () => {
       try {
-        // Obtener información del test
         const testResponse = await apiService.getData(`tests/${testId}/`);
         setTestInfo(testResponse.data);
 
-        // Obtener preguntas del test
         const preguntasResponse = await apiService.getData('preguntas/');
         const preguntasData = preguntasResponse.data.filter(
           (pregunta: any) => pregunta.fk_test === parseInt(testId, 10)
         );
 
-        // Obtener respuestas de cada pregunta
         for (const pregunta of preguntasData) {
           const respuestasResponse = await apiService.getData('respuestas/');
           pregunta.opciones = respuestasResponse.data.filter(
@@ -42,18 +48,16 @@ const TestView: React.FC = () => {
     fetchTestInfo();
   }, [testId]);
 
-  // Manejar el envío del test
   const handleSubmitTest = () => {
-    setShowToast(true); // Mostrar mensaje de éxito
+    setShowToast(true);
     setTimeout(() => {
-      history.push('/test'); // Redirigir a la vista de Test después de un breve momento
-    }, 2000); // Esperar 2 segundos antes de redirigir
+      history.push('/test');
+    }, 2000);
   };
 
   return (
     <IonPage>
       <IonContent fullscreen>
-        {/* Mostrar la información del test */}
         {testInfo && (
           <div className="test-info">
             <h1>{testInfo.nombre}</h1>
@@ -61,14 +65,11 @@ const TestView: React.FC = () => {
           </div>
         )}
 
-        {/* Mostrar las preguntas */}
-        <IonList>
+        <IonList className="test-list">
           {preguntas.map((pregunta) => (
-            <div key={pregunta.pk_pregunta_id}>
-              <IonItem>
-                <IonLabel>{pregunta.texto}</IonLabel>
-              </IonItem>
-              <IonRadioGroup>
+            <div className="test-question" key={pregunta.pk_pregunta_id}>
+              <p className="question-text">{pregunta.texto}</p>
+              <IonRadioGroup className="question-options">
                 {pregunta.opciones.map((opcion: any) => (
                   <IonItem key={opcion.pk_respuesta_id}>
                     <IonLabel>{opcion.texto}</IonLabel>
@@ -80,12 +81,10 @@ const TestView: React.FC = () => {
           ))}
         </IonList>
 
-        {/* Botón para enviar el test */}
         <IonButton expand="block" onClick={handleSubmitTest}>
           Enviar Test
         </IonButton>
 
-        {/* Mostrar un mensaje de éxito al enviar */}
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
@@ -98,4 +97,3 @@ const TestView: React.FC = () => {
 };
 
 export default TestView;
-

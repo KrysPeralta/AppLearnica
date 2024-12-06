@@ -1,14 +1,17 @@
 import React from 'react';
-import { IonToolbar, IonButtons, IonButton, IonTitle } from '@ionic/react';
+import { IonToolbar, IonButtons, IonButton, IonTitle, IonIcon } from '@ionic/react';
 import { useSession } from '../../context/SessionContext';
 import './Navbar.css';
+import { homeOutline } from 'ionicons/icons';
 
 const Navbar: React.FC = () => {
   const { isLoggedIn, userRole, logout } = useSession();
 
   return (
     <div className="navbar"> {/* Contenedor principal con clase personalizada */}
-        <a href="/" className="navbar-logo">🏠</a>
+        <a href="/" className="navbar-logo">
+         <IonIcon icon={homeOutline} size="large" />
+        </a>
       <div className="navbar-links">
         {!isLoggedIn ? (
           <>

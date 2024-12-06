@@ -1,43 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { IonPage, IonContent, IonHeader, IonButton } from '@ionic/react';
-import { useSession } from '../context/SessionContext'; // Contexto para sesión
-import { apiService } from '../services/apiService'; // Servicio API
-import Navbar from '../components/navbar/Navbar'; // Navbar
-import PerfilModal from './PerfilModal'; // Modal del perfil
-import './Test.css'; // Estilos específicos
+import { IonPage, IonContent, IonHeader, IonButton, IonIcon } from '@ionic/react';
+import { pencilOutline } from 'ionicons/icons';
+import { useSession } from '../context/SessionContext';
+import { apiService } from '../services/apiService';
+import Navbar from '../components/navbar/Navbar';
+import PerfilModal from './PerfilModal'; // Modal para editar el perfil
+import './PerfilPage.css'; // Archivo CSS
 
 const PerfilPage: React.FC = () => {
-  const { userId } = useSession(); // ID del usuario desde el contexto
-  const [perfil, setPerfil] = useState<any>(null); // Datos del perfil
-  const [error, setError] = useState<string | null>(null); // Errores
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para abrir/cerrar el modal
+  const { userId } = useSession();
+  const [perfil, setPerfil] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (userId) {
-      fetchPerfil(userId); // Cargar los datos del perfil al iniciar
+      fetchPerfil(userId);
     }
   }, [userId]);
 
-  // Función para obtener los datos del perfil desde la API
   const fetchPerfil = async (id: number) => {
     try {
       const perfilResponse = await apiService.getData(`datos_usuario/`, id);
       const perfilData = perfilResponse.data;
 
-      // Obtener credenciales asociadas al usuario
       const credencialResponse = await apiService.getData(
         `credenciales_usuario/`,
         perfilData.fk_credencial
       );
       const credencialData = credencialResponse.data;
 
-      // Obtener datos de la institución
       const institucionResponse = await apiService.getData(
         `instituciones/`,
         perfilData.fk_institucion
       );
 
-      // Combinar los datos en el estado del perfil
       setPerfil({
         ...perfilData,
         correo: credencialData.email,
@@ -51,15 +48,15 @@ const PerfilPage: React.FC = () => {
   };
 
   const handleEdit = () => {
-    setIsModalOpen(true); // Abrir el modal
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Cerrar el modal
+    setIsModalOpen(false);
   };
 
   const handleSave = (updatedData: any) => {
-    setPerfil({ ...perfil, ...updatedData }); // Actualizar el estado local con los nuevos datos
+    setPerfil({ ...perfil, ...updatedData });
   };
 
   return (
@@ -69,26 +66,59 @@ const PerfilPage: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div className="perfil-container">
-          <h1 className="perfil-title">Mi Perfil</h1>
+          <div className="perfil-header">
+            <div className="perfil-avatar">
+              <img src="/assets/images/users/users17.png" alt="Avatar del usuario" />
+            </div>
+            <h1 className="perfil-title">Mi Perfil</h1>
+          </div>
 
           {error && <p className="error-message">{error}</p>}
 
           {perfil ? (
             <div className="perfil-details">
-              <p><strong>Nombre:</strong> {perfil.nombre}</p>
-              <p><strong>Apellido Paterno:</strong> {perfil.apellido_paterno}</p>
-              <p><strong>Apellido Materno:</strong> {perfil.apellido_materno}</p>
-              <p><strong>Teléfono:</strong> {perfil.telefono}</p>
-              <p><strong>Correo:</strong> {perfil.correo}</p>
-              <p><strong>Rol:</strong> {perfil.rol}</p>
-              <p><strong>Institución:</strong> {perfil.institucion}</p>
-              <p><strong>Grado de Estudio:</strong> {perfil.grado_estudio}</p>
+              <div className="perfil-section">
+                <h2 className="perfil-section-title">Información Personal</h2>
+                <div className="perfil-item">
+                  <span className="perfil-label">Nombre:</span> {perfil.nombre}
+                </div>
+                <div className="perfil-item">
+                  <span className="perfil-label">Apellido Paterno:</span> {perfil.apellido_paterno}
+                </div>
+                <div className="perfil-item">
+                  <span className="perfil-label">Apellido Materno:</span> {perfil.apellido_materno}
+                </div>
+                <div className="perfil-item">
+                  <span className="perfil-label">Teléfono:</span> {perfil.telefono}
+                </div>
+              </div>
+              <hr className="perfil-divider" />
+              <div className="perfil-section">
+                <h2 className="perfil-section-title">Cuenta</h2>
+                <div className="perfil-item">
+                  <span className="perfil-label">Correo:</span> {perfil.correo}
+                </div>
+                <div className="perfil-item">
+                  <span className="perfil-label">Rol:</span> {perfil.rol}
+                </div>
+              </div>
+              <hr className="perfil-divider" />
+              <div className="perfil-section">
+                <h2 className="perfil-section-title">Institución</h2>
+                <div className="perfil-item">
+                  <span className="perfil-label">Institución:</span> {perfil.institucion}
+                </div>
+                <div className="perfil-item">
+                  <span className="perfil-label">Grado de Estudio:</span> {perfil.grado_estudio}
+                </div>
+              </div>
             </div>
           ) : (
-            <p>Cargando información del perfil...</p>
+            <p className="perfil-loading">Cargando información del perfil...</p>
           )}
 
           <IonButton expand="block" onClick={handleEdit} className="perfil-edit-button">
+            <IonIcon icon={pencilOutline} slot="start" />
             Editar Información
           </IonButton>
         </div>
