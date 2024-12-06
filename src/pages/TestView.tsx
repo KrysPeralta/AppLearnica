@@ -4,19 +4,11 @@ import { apiService } from '../services/apiService'; // Usa tu servicio de API p
 import { useParams, useHistory } from 'react-router-dom';
 import './TestView.scss';
 
-interface TestViewProps {}
-
-interface Pregunta {
-  pk_pregunta_id: number;
-  texto: string;
-  opciones: { pk_respuesta_id: number; texto: string }[];
-}
-
-const TestView: React.FC<TestViewProps> = () => {
+const TestView: React.FC = () => {
   const { testId } = useParams<{ testId: string }>(); // Obtener el testId desde los parámetros de la ruta
   const history = useHistory(); // Hook para redirigir a otra página
   const [testInfo, setTestInfo] = useState<{ nombre: string; descripcion: string } | null>(null);
-  const [preguntas, setPreguntas] = useState<Pregunta[]>([]);
+  const [preguntas, setPreguntas] = useState<any[]>([]);
   const [showToast, setShowToast] = useState(false);
 
   // Obtener información del test y preguntas
@@ -77,7 +69,7 @@ const TestView: React.FC<TestViewProps> = () => {
                 <IonLabel>{pregunta.texto}</IonLabel>
               </IonItem>
               <IonRadioGroup>
-                {pregunta.opciones.map((opcion) => (
+                {pregunta.opciones.map((opcion: any) => (
                   <IonItem key={opcion.pk_respuesta_id}>
                     <IonLabel>{opcion.texto}</IonLabel>
                     <IonRadio value={opcion.pk_respuesta_id} />

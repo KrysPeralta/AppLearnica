@@ -49,10 +49,10 @@ const App: React.FC = () => (
 
           {/* Corregimos la ruta para pasar el parámetro testId */}
           <Route
-  exact
-  path="/TestView/:testId"
-  render={(props) => <TestView testId={parseInt(props.match.params.testId, 10)} />}
-/>
+            exact
+            path="/TestView/:testId"
+            render={(props) => <TestView />}
+          />
 
 
           <Route exact path="/create-test">
